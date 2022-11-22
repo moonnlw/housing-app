@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/form"
+    app:startDestination="@id/createRequest">
+
+    <fragment
+            android:id="@+id/createRequest"
+            android:name="com.example.houseapp.newrequestscreen.CreateRequestView"
+            android:label="New request"
+            tools:layout="@layout/fragment_create_request">
+        <action
+            android:id="@+id/action_createRequest_to_sent"
+            app:destination="@id/sent"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/sent"
+        android:name="com.example.houseapp.newrequestscreen.SentView"
+        android:label="Sent"
+        tools:layout="@layout/fragment_request_sent"/>
+
+</navigation>

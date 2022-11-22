@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:layout_editor_absoluteY="80dp"
+    android:layout_marginHorizontal="10dp"
+    android:layout_marginVertical="5dp"
+    android:paddingHorizontal="5dp"
+    android:orientation="vertical"
+    android:background="@drawable/back_list_item">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/request_problemType"
+            style="@style/RequestTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="@string/problem_type" />
+
+        <TextView
+            style="@style/RequestTextStyle"
+            android:id="@+id/request_status"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/status"
+            android:gravity="end"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+    <TextView
+        style="@style/RequestTextStyle.Content"
+        android:id="@+id/request_text"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="@string/text"/>
+    </LinearLayout>
+
+</androidx.appcompat.widget.LinearLayoutCompat>
+
+

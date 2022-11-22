@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@+id/login">
+
+    <include app:graph="@navigation/home"/>
+    <include app:graph="@navigation/list"/>
+    <include app:graph="@navigation/form"/>
+
+    <fragment
+        android:id="@+id/login"
+        android:name="com.example.houseapp.loginscreen.LoginView"
+        android:label="Login">
+        <action
+            android:id="@+id/action_login_to_home"
+            app:destination="@id/home"
+            app:popUpTo="@id/login"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+</navigation>

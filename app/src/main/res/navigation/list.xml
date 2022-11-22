@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/list"
+    app:startDestination="@+id/requestsList">
+
+    <fragment
+            android:id="@+id/requestsList"
+            android:name="com.example.houseapp.listscreen.RequestsListView"
+            android:label="@string/title_list"
+            tools:layout="@layout/fragment_requests_list">
+        <action
+            android:id="@+id/action_requests_to_one"
+            app:destination="@id/request"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/request"
+        android:name="com.example.houseapp.listscreen.RequestItemView"
+        android:label="Request"
+        tools:layout="@layout/fragment_request_info">
+    </fragment>
+
+</navigation>

@@ -1,3 +1,22 @@
 <resources>
     <string name="app_name">House app</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="sign_up">sign up</string>
+    <string name="welcome">Welcome!</string>
+    <string name="done">Done</string>
+    <string name="title_home">Home</string>
+    <string name="title_list">Requests</string>
+    <string name="title_detail">Profile</string>
+    <string name="cd_home">Home</string>
+    <string name="cd_list">List</string>
+    <string name="cd_form">Form</string>
+    <string name="request_id">ID: </string>
+    <string name="status">status</string>
+    <string name="problem_type">type: </string>
+    <string name="text">text</string>
+    <string name="sign_in">SIGN IN</string>
+    <string name="login">LOGIN</string>
+    <string name="new_request">New request</string>
 </resources>
