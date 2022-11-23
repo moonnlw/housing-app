@@ -4,7 +4,7 @@ enum class ProblemType {
     Water, Heat, Electricity, Other;
 }
 
-fun display(problemType: ProblemType) : String {
+fun convert(problemType: ProblemType) : String {
     return when (problemType) {
         ProblemType.Water -> "Водоотведение"
         ProblemType.Heat -> "Теплоснабжение"

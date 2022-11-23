@@ -9,8 +9,13 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.houseapp.FakeRequest
 import com.example.houseapp.R
+import com.example.houseapp.UserRequest
+import com.example.houseapp.UserRequests
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
+import org.jetbrains.exposed.sql.addLogger
+import org.jetbrains.exposed.sql.select
+import org.jetbrains.exposed.sql.transactions.transaction
 
 /**
  * Показывает список запросов пользователя
@@ -22,7 +27,7 @@ class RequestsListView : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_requests_list, container, false)
 
-        val data = Array(10) { FakeRequest(id = it + 1) } // data example
+        val data = getUserRequests()
 
         val viewAdapter = RequestAdapter(data)
 
@@ -35,9 +40,29 @@ class RequestsListView : Fragment() {
         return view
     }
 
+    private fun getUserRequests(): ArrayList<UserRequest>  {
+        val requests : ArrayList<UserRequest> = ArrayList()
+        try {
+
+            transaction {
+                addLogger()
+                UserRequests.select(UserRequests.userId.eq(24)).forEach() {
+                    requests.add(UserRequest(
+                        it[UserRequests.userId],
+                        it[UserRequests.problemType],
+                        it[UserRequests.description],
+                        it[UserRequests.isDone]
+                    ))
+                }
+            }
+        } catch (e: Exception) {
+            println(e)
+        }
+        return requests
+    }
 }
 
-class RequestAdapter(private val requestSet: Array<FakeRequest>) :
+class RequestAdapter(private val requestSet: ArrayList<UserRequest>) :
     RecyclerView.Adapter<RequestAdapter.ViewHolder>() {
 
     /**

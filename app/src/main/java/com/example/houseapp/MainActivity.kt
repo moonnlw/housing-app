@@ -1,7 +1,6 @@
 package com.example.houseapp
 
 import android.os.Bundle
-import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
@@ -16,7 +15,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
-import kotlinx.coroutines.*
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 
 class MainActivity : AppCompatActivity() {
 
@@ -53,10 +52,6 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration)
     }
 
-    fun displayButtonOnClick(view: View) {
-        sendRequest(createRequest())
-    }
-
     private fun createDatabaseConnection() {
         //For Internet connection with database
         val policy = ThreadPolicy.Builder().permitAll().build()
@@ -72,16 +67,16 @@ class MainActivity : AppCompatActivity() {
         val userId = 1;
         val problemType = ProblemType.Other;
         val text = "some text";
-        return UserRequest(userId, problemType, text);
+        return UserRequest(userId, convert(problemType), text, false);
     }
 
-    private fun sendRequest(request : UserRequest) = runBlocking {
+    private fun sendRequest(request : UserRequest) {
         try {
             transaction {
                 addLogger()
                 UserRequests.insert {
                     it[userId] = request.userId
-                    it[type] = display(request.problemType)
+                    it[problemType] = request.problemType
                     it[description] = request.text
                     it[isDone] = request.isDone
                 }
