@@ -7,13 +7,14 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.houseapp.R
 import com.example.houseapp.UserRequest
 import com.example.houseapp.UserRequests
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
-import org.jetbrains.exposed.sql.addLogger
 import org.jetbrains.exposed.sql.select
 import org.jetbrains.exposed.sql.transactions.transaction
 
@@ -21,6 +22,7 @@ import org.jetbrains.exposed.sql.transactions.transaction
  * Показывает список запросов пользователя
  */
 class RequestsListView : Fragment() {
+    private val viewModel : RequestsListViewModel by activityViewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -36,17 +38,15 @@ class RequestsListView : Fragment() {
             adapter = viewAdapter
 
         }
-
         return view
     }
 
     private fun getUserRequests(): ArrayList<UserRequest>  {
+        val currentUserId = viewModel.getUserId()
         val requests : ArrayList<UserRequest> = ArrayList()
         try {
-
             transaction {
-                addLogger()
-                UserRequests.select(UserRequests.userId.eq(24)).forEach() {
+                UserRequests.select(UserRequests.userId.eq(currentUserId)).forEach() {
                     requests.add(UserRequest(
                         it[UserRequests.userId],
                         it[UserRequests.problemType],
