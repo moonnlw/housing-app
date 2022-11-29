@@ -32,6 +32,7 @@
                 android:layout_marginBottom="12dp">
 
                 <AutoCompleteTextView
+                    style="@style/RequestInfo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/problem_type"
@@ -43,10 +44,11 @@
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:endIconMode="clear_text"
-                app:endIconDrawable="@drawable/ic_outline_clear">
+                app:endIconDrawable="@drawable/ic_outline_clear"
+                app:endIconMode="clear_text">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    style="@style/RequestInfo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/your_name" />
@@ -67,26 +69,27 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="12dp"
-            android:layout_marginBottom="16dp">
+            android:layout_marginBottom="2dp">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="top"
+                app:endIconDrawable="@drawable/ic_outline_clear"
                 app:endIconMode="clear_text"
-                app:endIconDrawable="@drawable/ic_outline_clear">
+                app:counterEnabled="true"
+                app:counterMaxLength="300"
+                app:errorEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    style="@style/RequestInfo"
                     android:layout_width="match_parent"
                     android:layout_height="130dp"
-                    android:hint="@string/message"
                     android:gravity="top|start"
-                    app:helperTextEnabled="true"
-                    app:counterEnabled="true"
-                    app:counterMaxLength="350"
-                    app:errorEnabled="true"
+                    android:hint="@string/message"
                     android:lineSpacingMultiplier="1.2"
-                    />
+
+                    app:helperTextEnabled="true" />
             </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
