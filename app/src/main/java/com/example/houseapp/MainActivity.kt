@@ -1,5 +1,6 @@
 package com.example.houseapp
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -39,6 +40,19 @@ class MainActivity : AppCompatActivity() {
                 if (destination.id == R.id.login) View.GONE
                 else View.VISIBLE
         }
+
+/*        window.statusBarColor = ContextCompat.getColor(
+            this, com.google.android.material.R.attr.colorSecondaryContainer
+        )*/
+
+        /*window.statusBarColor = ContextCompat.getColor(this, com.google.android.material.R.attr.colorSurface);*/
+        //window.navigationBarColor = ContextCompat.getColor(this,R.color.purple_500);
+
+    /*val color = SurfaceColors.SURFACE_2.getColor(this)
+        window.statusBarColor = color
+        window.navigationBarColor = color*/
+
+        window.statusBarColor = Color.TRANSPARENT
     }
 
     override fun onSupportNavigateUp(): Boolean {
