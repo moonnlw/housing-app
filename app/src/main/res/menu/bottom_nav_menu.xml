@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/home"
-        android:icon="@drawable/ic_home"
+        android:icon="@drawable/selection_ic_home"
         android:contentDescription="@string/cd_home"
         android:title="@string/title_home" />
     <item
@@ -12,7 +12,7 @@
         android:title="@string/title_list" />
     <item
         android:id="@+id/form"
-        android:icon="@drawable/ic_feedback"
+        android:icon="@drawable/selection_ic_assignment"
         android:contentDescription="@string/cd_form"
         android:title="@string/new_request" />
     </menu>
