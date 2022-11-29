@@ -13,9 +13,8 @@
         android:id="@+id/info_card"
         style="@style/Widget.HouseApp.CardView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_margin="12dp"
-        android:layout_weight="0.75">
+        android:layout_height="180dp"
+        android:layout_margin="12dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -119,10 +118,9 @@
     <com.google.android.material.card.MaterialCardView
         style="@style/Widget.HouseApp.CardView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="12dp"
-        android:layout_marginBottom="12dp"
-        android:layout_weight="1">
+        android:layout_marginBottom="12dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -152,21 +150,21 @@
                 style="@style/RequestInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_above="@id/request_date"
                 android:layout_below="@id/info_message_word"
                 android:layout_marginHorizontal="8dp"
                 android:lineSpacingMultiplier="1.2"
+                android:maxLines="8"
                 android:text="@string/info_message_sample_ru" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/request_date"
                 style="@style/RequestInfoSmallLine"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
+                android:layout_height="16dp"
+                android:layout_below="@id/info_message"
                 android:layout_marginEnd="5dp"
                 android:gravity="end"
-                android:paddingBottom="3dp"
+
                 android:text="@string/info_date_sample" />
         </RelativeLayout>
 
@@ -176,16 +174,15 @@
     <com.google.android.material.card.MaterialCardView
         style="@style/Widget.HouseApp.CardView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="12dp"
-        android:layout_marginBottom="12dp"
-        android:layout_weight="1">
+        android:layout_marginBottom="12dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="11dp"
+            android:layout_marginTop="12dp"
             android:orientation="vertical">
 
             <com.google.android.material.textview.MaterialTextView
@@ -209,21 +206,22 @@
                 style="@style/RequestInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_above="@id/request_answer_date"
                 android:layout_below="@id/info_answer_word"
                 android:layout_marginHorizontal="8dp"
                 android:lineSpacingMultiplier="1.2"
-                android:text="@string/info_message_sample" />
+                android:maxLines="9"
+                android:text="@string/info_message_sample_ru" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/request_answer_date"
                 style="@style/RequestInfoSmallLine"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
+                android:layout_height="16dp"
+                android:layout_below="@id/info_answer"
                 android:layout_marginEnd="5dp"
-                android:gravity="end"
-                android:paddingBottom="3dp"
+                android:gravity="end|top"
+
+
                 android:text="@string/info_date_sample" />
         </RelativeLayout>
 
