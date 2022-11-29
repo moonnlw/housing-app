@@ -1,17 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.Material3.DayNight">
 
+    <style name="RequestTextStyle" parent="RequestInfo.Headers">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/material_on_surface_emphasis_high_type</item>
     </style>
 
-    <style name="RequestTextStyle" parent="TextAppearance.Material3.BodyMedium">
-        <item name="android:textSize">18sp</item>
-        <item name="android:textColor">@color/white</item>
+    <style name="RequestTextStyle.Content" parent="RequestInfo.Headers">
+        <item name="android:textColor">@color/material_on_background_emphasis_medium</item>
     </style>
 
-    <style name="RequestTextStyle.Content" parent="RequestTextStyle">
-        <item name="android:textSize">13sp</item>
-        <item name="android:textColor">@color/grey</item>
+    <style name="RequestInfo" parent="">
+        <item name="android:textSize">16sp</item>
+        <item name="android:hyphenationFrequency">full</item>
     </style>
+
+    <style name="RequestInfo.Headers" parent="RequestInfo">
+        <item name="android:paddingEnd">4dp</item>
+        <item name="android:paddingStart">4dp</item>
+        <item name="android:paddingBottom">1dp</item>
+    </style>
+
+    <style name="RequestInfoSmallLine" parent="TextAppearance.Material3.BodySmall">
+        <item name="android:textColor">@color/material_on_background_emphasis_medium</item>
+    </style>
+
+    <style name="Widget.HouseApp.CardView" parent="Widget.Material3.CardView.Elevated">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.HouseApp.Card</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.HouseApp.MediumComponent</item>
+        <item name="cardElevation">3dp</item>
+    </style>
+
+    <style name="ShapeAppearance.HouseApp.MediumComponent" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">10dp</item>
+    </style>
+
+    <style name="ThemeOverlay.HouseApp.Card" parent="">
+        <!-- set custom colors for card-->
+    </style>
+
+    <style name="Widget.HouseApp.BottomNavigationView" parent="Widget.Material3.BottomNavigationView">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.HouseApp.BottomNavigationView</item>
+    </style>
+
+    <style name="ThemeOverlay.HouseApp.BottomNavigationView" parent="">
+        <item name="colorSurface">?attr/colorOnSecondaryContainer</item>
+        <item name="colorOnSurfaceVariant">?attr/colorTertiaryContainer</item>
+    </style>
+
 </resources>

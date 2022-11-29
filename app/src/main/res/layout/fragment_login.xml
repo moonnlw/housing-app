@@ -7,7 +7,6 @@
     android:id="@+id/title_constraint"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/background_light"
     tools:context="com.example.houseapp.loginscreen.LoginView"
     tools:layout_editor_absoluteY="80dp"
     android:padding="30dp">
