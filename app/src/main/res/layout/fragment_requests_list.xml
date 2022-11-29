@@ -13,4 +13,4 @@
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
     tools:context="com.example.houseapp.listscreen.RequestsListView"
-    tools:listitem="@layout/list_view_item"/>
+    tools:listitem="@layout/list_view_item" />

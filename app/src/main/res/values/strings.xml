@@ -14,9 +14,20 @@
     <string name="cd_form">Form</string>
     <string name="request_id">ID: </string>
     <string name="status">status</string>
-    <string name="problem_type">type: </string>
-    <string name="text">text</string>
+    <string name="problem_type">Type:</string>
+    <string name="text">text </string>
     <string name="sign_in">SIGN IN</string>
     <string name="login">LOGIN</string>
-    <string name="new_request">New request</string>
+    <string name="new_request">New</string>
+    <string name="address">Address:</string>
+    <string name="from">From:</string>
+    <string name="info_status">Status:</string>
+    <string name="info_date_sample">10:15 25.06.22</string>
+    <string name="message">Message:</string>
+    <string name="answer">Answer:</string>
+    <string name="info_message_sample">This is a sample for user message in request info view. It should not break the borders and should looks well and pretty. It is too long and contains a lot of symbols. Long message, repeating, this is a long message. Verryyyyyyyyyyyyyyyyyyyyyyyyyyy long! Not long enough to destroy the textView, so lets make it much and much loooongeeeeeeeeeeeeeeeeeeeer.</string>
+    <string name="info_message_sample_ru">Когда человек сознательно или интуитивно выбирает себе в жизни какую-то цель, жизненную задачу, он невольно дает себе оценку. По тому, ради чего человек живет, можно судить и о его самооценке - низкой или высокой. Если человек живет, чтобы приносить людям добро, облегчать их страдания, давать людям радость, то он оценивает себя на уровне этой своей человечности. Он ставит себе цель, достойную человека.</string>
+    <string name="info_message_sample_ru2">ААаааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааа</string>
+    <string name="problemType_sample">plumbing</string>
+    <string name="status_sample">completed</string>
 </resources>
