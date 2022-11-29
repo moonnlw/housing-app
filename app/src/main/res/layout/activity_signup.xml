@@ -1,16 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/title_constraint"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.houseapp.loginscreen.LoginView"
-    tools:layout_editor_absoluteY="80dp"
-    android:padding="30dp">
-
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -45,26 +38,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:hint="@string/password_hint"
+                android:inputType="textPassword"
                 tools:ignore="SpeakableTextPresentCheck" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/login_btn"
+            android:id="@+id/signup_btn"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_marginTop="32dp"
-            android:text="@string/login" />
-
-        <TextView
-            android:id="@+id/reset_pass_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:clickable="true"
-            android:focusable="true"
-            android:text="Забыли пароль?"
-            tools:ignore="TouchTargetSizeCheck" />
+            android:text="@string/signup_btn" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -100,11 +84,11 @@
         </RelativeLayout>
 
         <Button
-            android:id="@+id/signup_btn"
+            android:id="@+id/login_btn"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_marginTop="16dp"
-            android:text="@string/signup_btn" />
+            android:text="@string/login" />
 
     </LinearLayout>
 

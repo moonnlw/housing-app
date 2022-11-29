@@ -10,15 +10,22 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.houseapp.FakeRequest
 import com.example.houseapp.R
+import com.example.houseapp.UserRequest
+import com.example.houseapp.UserRequests
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
+import org.jetbrains.exposed.sql.select
+import org.jetbrains.exposed.sql.transactions.transaction
 
 /**
  * Показывает список запросов пользователя
  */
 class RequestsListView : Fragment() {
+    private val viewModel : RequestsListViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,7 +34,7 @@ class RequestsListView : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_requests_list, container, false)
 
-        val data = Array(10) { FakeRequest(id = it + 1) } // data example
+        val data = getUserRequests()
 
         val viewAdapter = RequestAdapter(data)
 
@@ -36,10 +43,28 @@ class RequestsListView : Fragment() {
             adapter = viewAdapter
             addItemDecoration(SpaceItemDecorator())
         }
-
         return view
     }
 
+    private fun getUserRequests(): ArrayList<UserRequest>  {
+        val currentUserId = viewModel.getUserId()
+        val requests : ArrayList<UserRequest> = ArrayList()
+        try {
+            transaction {
+                UserRequests.select(UserRequests.userId.eq(currentUserId)).forEach() {
+                    requests.add(UserRequest(
+                        it[UserRequests.userId],
+                        it[UserRequests.problemType],
+                        it[UserRequests.description],
+                        it[UserRequests.isDone]
+                    ))
+                }
+            }
+        } catch (e: Exception) {
+            println(e)
+        }
+        return requests
+    }
 }
 
 /**
@@ -70,7 +95,7 @@ class SpaceItemDecorator : RecyclerView.ItemDecoration() {
     }
 }
 
-class RequestAdapter(private val requestSet: Array<FakeRequest>) :
+class RequestAdapter(private val requestSet: ArrayList<UserRequest>) :
     RecyclerView.Adapter<RequestAdapter.ViewHolder>() {
 
     /**
