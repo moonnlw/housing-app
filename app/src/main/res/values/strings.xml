@@ -15,8 +15,6 @@
     <string name="problem_type">Type:</string>
     <string name="text">text </string>
     <string name="sign_in">SIGN IN</string>
-    <string name="login">LOGIN</string>
-    <string name="new_request">New</string>
     <string name="address">Address:</string>
     <string name="from">From:</string>
     <string name="info_status">Status:</string>
