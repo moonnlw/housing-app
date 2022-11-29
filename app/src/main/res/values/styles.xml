@@ -22,7 +22,8 @@
     </style>
 
     <style name="RequestInfoSmallLine" parent="TextAppearance.Material3.BodySmall">
-        <item name="android:textColor">@color/material_on_background_emphasis_medium</item>
+        <item name="android:textColor">@color/material_on_background_emphasis_high_type</item>
+        <item name="android:textSize">10sp</item>
     </style>
 
     <style name="Widget.HouseApp.CardView" parent="Widget.Material3.CardView.Elevated">

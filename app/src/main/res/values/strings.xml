@@ -30,4 +30,7 @@
     <string name="info_message_sample_ru2">ААаааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааа</string>
     <string name="problemType_sample">plumbing</string>
     <string name="status_sample">completed</string>
+    <string name="send_request">Send request</string>
+    <string name="your_name">Your name:</string>
+    <string name="info_message_sample_ru3">Тут мало текста, очень мало текста</string>
 </resources>
