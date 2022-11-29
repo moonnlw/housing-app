@@ -37,8 +37,11 @@ class MainActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination: NavDestination, _ ->
             bottomNavigationView.visibility =
-                if (destination.id == R.id.login) View.GONE
-                else View.VISIBLE
+                when(destination.id) {
+                    R.id.login -> View.GONE
+                    R.id.request -> View.GONE
+                    else -> View.VISIBLE
+                }
         }
 
 /*        window.statusBarColor = ContextCompat.getColor(
