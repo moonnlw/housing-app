@@ -2,7 +2,7 @@ package com.example.houseapp.listscreen
 
 import androidx.lifecycle.ViewModel
 
-class RequestsListViewModel : ViewModel() {
+class UserViewModel : ViewModel() {
     private var userId: String = ""
 
     fun setUserId(id: String) {

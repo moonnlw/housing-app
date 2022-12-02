@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.os.StrictMode
 import android.os.StrictMode.ThreadPolicy
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
@@ -15,14 +16,14 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.example.houseapp.listscreen.RequestsListViewModel
+import com.example.houseapp.listscreen.UserViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
 
 class MainActivity : AppCompatActivity() {
-    private val viewModel: RequestsListViewModel by viewModels()
+    private val viewModel: UserViewModel by viewModels()
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var auth: FirebaseAuth
@@ -90,7 +91,13 @@ class MainActivity : AppCompatActivity() {
         val driver = "org.postgresql.Driver"
         val user = "avinugmjzprnkv"
         val password = "525799763887e66a60857bb4b059e013cc650bb9dbf86c28077ed7235a7ca159"
-        Database.connect(jdbcUrl, driver, user, password)
+        try {
+            Database.connect(jdbcUrl, driver, user, password)
+        }
+        catch(e : Exception) {
+            println(e)
+            Toast.makeText(this, "Check your Internet connection", Toast.LENGTH_LONG).show()
+        }
     }
 
     private fun sendRequest(request: UserRequest) {

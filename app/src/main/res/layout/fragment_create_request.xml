@@ -26,12 +26,14 @@
             android:orientation="vertical">
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/descriptionInput"
                 style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="12dp">
 
                 <AutoCompleteTextView
+                    android:id="@+id/selectType"
                     style="@style/RequestInfo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -69,7 +71,8 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="12dp"
-            android:layout_marginBottom="2dp">
+            android:layout_marginBottom="2dp"
+            android:orientation="horizontal">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
@@ -82,16 +85,16 @@
                 app:errorEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/descriptionInputField"
                     style="@style/RequestInfo"
                     android:layout_width="match_parent"
                     android:layout_height="130dp"
                     android:gravity="top|start"
                     android:hint="@string/message"
-                    android:lineSpacingMultiplier="1.2"
 
+                    android:lineSpacingMultiplier="1.2"
                     app:helperTextEnabled="true" />
             </com.google.android.material.textfield.TextInputLayout>
-
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
