@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -12,8 +11,6 @@ import androidx.fragment.app.activityViewModels
 import com.example.houseapp.R
 import com.example.houseapp.UserRequests
 import com.example.houseapp.listscreen.UserViewModel
-import com.google.android.material.textfield.TextInputEditText
-import kotlinx.android.synthetic.main.fragment_create_request.*
 import kotlinx.android.synthetic.main.fragment_create_request.view.*
 import org.jetbrains.exposed.sql.addLogger
 import org.jetbrains.exposed.sql.insert
@@ -60,5 +57,4 @@ class CreateRequestView : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         (activity as AppCompatActivity).supportActionBar?.title = "Create new request"
     }
-
 }
