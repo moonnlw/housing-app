@@ -76,19 +76,19 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="293dp"
                 android:gravity="top"
-                app:endIconDrawable="@drawable/ic_outline_clear"
-                app:endIconMode="clear_text"
                 app:counterEnabled="true"
                 app:counterMaxLength="300"
+                app:endIconDrawable="@drawable/ic_outline_clear"
+                app:endIconMode="clear_text"
                 app:errorEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/descriptionInputField"
                     style="@style/RequestInfo"
                     android:layout_width="match_parent"
-                    android:layout_height="130dp"
+                    android:layout_height="257dp"
                     android:gravity="top|start"
                     android:hint="@string/message"
 

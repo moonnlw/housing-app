@@ -35,7 +35,11 @@ class CreateRequestView : Fragment() {
             val description = viewOfLayout.descriptionInputField.text.toString()
             if (selectedType.isEmpty() || description.isEmpty()) {
                 Toast.makeText(activity, "Please fill all fields before send a request", Toast.LENGTH_LONG).show()
-            } else {
+            }
+            else if (description.length > 300) {
+                Toast.makeText(activity, "Too large message", Toast.LENGTH_LONG).show()
+            }
+            else {
                 try {
                     transaction {
                         addLogger()
