@@ -30,7 +30,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".loginscreen.LoginActivity"
             android:exported="true">
 
             <meta-data
@@ -39,7 +39,7 @@
         </activity>
 
         <activity
-            android:name=".SignupActivity"
+            android:name=".loginscreen.SignupActivity"
             android:exported="true">
 
             <meta-data

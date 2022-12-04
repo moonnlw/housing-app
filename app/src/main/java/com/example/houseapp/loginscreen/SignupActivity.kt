@@ -1,4 +1,4 @@
-package com.example.houseapp
+package com.example.houseapp.loginscreen
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +7,8 @@ import android.text.TextUtils
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import com.example.houseapp.MainActivity
+import com.example.houseapp.R
 //import com.example.houseapp.loginscreen.LoginView
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth

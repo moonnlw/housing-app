@@ -10,22 +10,20 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.example.houseapp.InjectorUtils
 import com.example.houseapp.R
-import com.example.houseapp.UserRequest
-import com.example.houseapp.UserRequests
-import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
-import org.jetbrains.exposed.sql.select
-import org.jetbrains.exposed.sql.transactions.transaction
+import com.example.houseapp.data.UserRequest
 
 /**
  * Показывает список запросов пользователя
  */
 class RequestsListView : Fragment() {
-    private val viewModel : RequestsListViewModel by activityViewModels()
+
+    private lateinit var viewModel: RequestsViewModel
+    private val viewAdapter: RequestAdapter = RequestAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,10 +31,6 @@ class RequestsListView : Fragment() {
     ): View? {
 
         val view = inflater.inflate(R.layout.fragment_requests_list, container, false)
-
-        val data = getUserRequests()
-
-        val viewAdapter = RequestAdapter(data)
 
         view.findViewById<RecyclerView>(R.id.requests_list).run {
             setHasFixedSize(true)
@@ -46,24 +40,24 @@ class RequestsListView : Fragment() {
         return view
     }
 
-    private fun getUserRequests(): ArrayList<UserRequest>  {
-        val currentUserId = viewModel.getUserId()
-        val requests : ArrayList<UserRequest> = ArrayList()
-        try {
-            transaction {
-                UserRequests.select(UserRequests.userId.eq(currentUserId)).forEach() {
-                    requests.add(UserRequest(
-                        it[UserRequests.userId],
-                        it[UserRequests.problemType],
-                        it[UserRequests.description],
-                        it[UserRequests.isDone]
-                    ))
-                }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewModel = ViewModelProvider(
+            this,
+            InjectorUtils.provideRequestsViewModelFactory()
+        )[RequestsViewModel::class.java]
+
+
+//        viewModel.viewModelScope.launch(Dispatchers.IO) {
+//            viewModel.addRequest(UserRequest(viewModel.getUserId(),"insects", "help"))
+//        }
+
+        viewModel.requests.observe(viewLifecycleOwner) { requests ->
+            requests?.apply {
+                viewAdapter.requestSet = requests
             }
-        } catch (e: Exception) {
-            println(e)
         }
-        return requests
     }
 }
 
@@ -95,8 +89,17 @@ class SpaceItemDecorator : RecyclerView.ItemDecoration() {
     }
 }
 
-class RequestAdapter(private val requestSet: ArrayList<UserRequest>) :
+
+class RequestAdapter:
     RecyclerView.Adapter<RequestAdapter.ViewHolder>() {
+
+
+    var requestSet: List<UserRequest> = emptyList()
+        @SuppressLint("NotifyDataSetChanged")
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
 
     /**
      * Класс хранит ссылки на view для каждого элемента данных
@@ -127,13 +130,12 @@ class RequestAdapter(private val requestSet: ArrayList<UserRequest>) :
         val item = requestSet[position]
 
         holder.item.findViewById<TextView>(R.id.request_problemType).text = item.problemType
-        holder.item.findViewById<TextView>(R.id.request_text).text = item.text
-
+        holder.item.findViewById<TextView>(R.id.request_text).text = item.description
         holder.item.findViewById<TextView>(R.id.request_status).text =
             if (item.isDone) "completed" else "declined"
 
         holder.item.setOnClickListener {
-            val bundle = bundleOf(PROBLEM_KEY to item.problemType)
+            val bundle = bundleOf(REQUEST_KEY to item.requestId)
 
             holder.item.findNavController().navigate(
                 R.id.action_requests_to_one,
@@ -146,11 +148,6 @@ class RequestAdapter(private val requestSet: ArrayList<UserRequest>) :
     override fun getItemCount() = requestSet.size
 
     companion object {
-        const val PROBLEM_KEY = "type"
-        /*const val REQUEST_KEY = "id"
-        const val ID_KEY = "id"
-        const val FROM_KEY = "address"
-        const val DATE_KEY = "address"
-        const val ADDRESS_KEY = "address"*/
+        const val REQUEST_KEY = "id"
     }
 }

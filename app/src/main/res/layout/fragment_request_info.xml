@@ -104,10 +104,9 @@
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/info_status"
-                    style="@style/RequestInfo"
+                    style="@style/RequestInfo.Headers"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
                     android:text="" />
             </LinearLayout>
 
@@ -154,7 +153,7 @@
                 android:layout_marginHorizontal="8dp"
                 android:lineSpacingMultiplier="1.2"
                 android:maxLines="8"
-                android:text="@string/info_message_sample_ru" />
+                android:text="" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/request_date"
@@ -210,7 +209,7 @@
                 android:layout_marginHorizontal="8dp"
                 android:lineSpacingMultiplier="1.2"
                 android:maxLines="9"
-                android:text="@string/info_message_sample_ru" />
+                android:text="" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/request_answer_date"

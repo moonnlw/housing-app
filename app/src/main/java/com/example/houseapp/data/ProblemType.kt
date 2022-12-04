@@ -1,4 +1,4 @@
-package com.example.houseapp
+package com.example.houseapp.data
 
 enum class ProblemType {
     Water, Heat, Electricity, Other;
