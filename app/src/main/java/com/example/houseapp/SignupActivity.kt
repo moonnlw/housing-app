@@ -10,6 +10,8 @@ import android.widget.Toast
 //import com.example.houseapp.loginscreen.LoginView
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
+import org.jetbrains.exposed.sql.insert
+import org.jetbrains.exposed.sql.transactions.transaction
 
 class SignupActivity : AppCompatActivity() {
 
@@ -49,6 +51,15 @@ class SignupActivity : AppCompatActivity() {
                             Toast.makeText(this, "Registration Failed", Toast.LENGTH_LONG).show()
                         }
                     })
+                addUserToDatabase()
+            }
+        }
+    }
+
+    private fun addUserToDatabase() {
+        transaction {
+            Roles.insert {
+                it[userId] = auth.currentUser!!.uid
             }
         }
     }

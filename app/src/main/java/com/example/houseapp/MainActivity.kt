@@ -20,6 +20,7 @@ import com.example.houseapp.listscreen.UserViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import org.jetbrains.exposed.sql.*
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.transactions.transaction
 
 class MainActivity : AppCompatActivity() {
@@ -30,6 +31,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        createDatabaseConnection()
         auth = FirebaseAuth.getInstance()
 
         if (auth.currentUser == null) {
@@ -38,6 +40,18 @@ class MainActivity : AppCompatActivity() {
             finish()
         } else {
             val currentUserId = auth.currentUser!!.uid
+
+            var isAdmin = false
+            transaction {
+                isAdmin = Roles.select { Roles.userId eq currentUserId }.single()[Roles.isAdmin]
+            }
+
+            if (isAdmin) {
+                Toast.makeText(this, "Admin", Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(this, "User", Toast.LENGTH_LONG).show()
+            }
+
             viewModel.setUserId(currentUserId);
         }
 
@@ -75,7 +89,6 @@ class MainActivity : AppCompatActivity() {
         window.navigationBarColor = color*/
 
         window.statusBarColor = Color.TRANSPARENT
-        createDatabaseConnection()
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -97,22 +110,6 @@ class MainActivity : AppCompatActivity() {
         catch(e : Exception) {
             println(e)
             Toast.makeText(this, "Check your Internet connection", Toast.LENGTH_LONG).show()
-        }
-    }
-
-    private fun sendRequest(request: UserRequest) {
-        try {
-            transaction {
-                addLogger()
-                UserRequests.insert {
-                    it[userId] = request.userId
-                    it[problemType] = request.problemType
-                    it[description] = request.text
-                    it[isDone] = request.isDone
-                }
-            }
-        } catch (e: Exception) {
-            println(e)
         }
     }
 }

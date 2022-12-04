@@ -45,11 +45,13 @@ class CreateRequestView : Fragment() {
                         addLogger()
                         UserRequests.insert {
                             it[UserRequests.userId] = userId
-                            it[UserRequests.problemType] = problemType
+                            it[problemType] = selectedType
                             it[UserRequests.description] = description
                         }
+                        Toast.makeText(activity, "Your request has been sent successfully", Toast.LENGTH_LONG).show()
                     }
                 } catch (e: SQLException) {
+                    println(e)
                     Toast.makeText(activity, "Check your Internet connection", Toast.LENGTH_LONG).show()
                 }
             }
