@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         } else {
             val currentUserId = auth.currentUser!!.uid
 
-            var isAdmin = false
+            /*var isAdmin = false
             transaction {
                 isAdmin = Roles.select { Roles.userId eq currentUserId }.single()[Roles.isAdmin]
             }
@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Admin", Toast.LENGTH_LONG).show()
             } else {
                 Toast.makeText(this, "User", Toast.LENGTH_LONG).show()
-            }
+            }*/
 
             viewModel.setUserId(currentUserId);
         }
