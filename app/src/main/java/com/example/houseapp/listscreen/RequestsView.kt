@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.houseapp.InjectorUtils
@@ -22,8 +22,8 @@ import com.example.houseapp.data.UserRequest
  */
 class RequestsListView : Fragment() {
 
-    private lateinit var viewModel: RequestsViewModel
     private val viewAdapter: RequestAdapter = RequestAdapter()
+    private val viewModel: RequestsViewModel by activityViewModels { InjectorUtils.provideRequestsViewModelFactory() }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,16 +42,6 @@ class RequestsListView : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        viewModel = ViewModelProvider(
-            this,
-            InjectorUtils.provideRequestsViewModelFactory()
-        )[RequestsViewModel::class.java]
-
-
-//        viewModel.viewModelScope.launch(Dispatchers.IO) {
-//            viewModel.addRequest(UserRequest(viewModel.getUserId(),"insects", "help"))
-//        }
 
         viewModel.requests.observe(viewLifecycleOwner) { requests ->
             requests?.apply {
@@ -132,7 +122,7 @@ class RequestAdapter:
         holder.item.findViewById<TextView>(R.id.request_problemType).text = item.problemType
         holder.item.findViewById<TextView>(R.id.request_text).text = item.description
         holder.item.findViewById<TextView>(R.id.request_status).text =
-            if (item.isDone) "completed" else "declined"
+            if (item.isDone) "done" else "in progress"
 
         holder.item.setOnClickListener {
             val bundle = bundleOf(REQUEST_KEY to item.requestId)

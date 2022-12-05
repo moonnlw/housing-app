@@ -1,6 +1,6 @@
 package com.example.houseapp.listscreen
 
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.houseapp.data.RequestsRepository
@@ -9,33 +9,26 @@ import kotlinx.coroutines.*
 
 class RequestsViewModel(private val requestsRepository: RequestsRepository) : ViewModel() {
 
-    private var userId: String = ""
+    var userId: String = ""
+        set(value) {
+            field = value
+            refreshRequests()
+        }
 
-    val requests: MutableLiveData<List<UserRequest>> by lazy {
-        MutableLiveData<List<UserRequest>>()
-    }
+    val requests: LiveData<List<UserRequest>>
+        get() = _requests
 
-    init {
-        refreshRequests()
-    }
+    private val _requests = requestsRepository.requests
 
     private fun refreshRequests() {
-        viewModelScope.launch(Dispatchers.IO) {
-            requests.postValue(requestsRepository.getAllRequests())
+        viewModelScope.launch {
+            requestsRepository.refreshUserRequests(userId)
         }
     }
 
-    fun addRequest(userRequest: UserRequest) {
+    /*fun addRequest(userRequest: UserRequest) {
         viewModelScope.launch(Dispatchers.IO) {
             requestsRepository.addRequest(userRequest)
         }
-    }
-
-    fun setUserId (id: String) {
-        userId = id
-    }
-
-    fun getUserId(): String {
-        return userId
-    }
+    }*/
 }

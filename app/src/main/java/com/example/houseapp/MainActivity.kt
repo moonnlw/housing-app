@@ -5,7 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.ViewModelProvider
+import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
@@ -26,6 +27,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var auth: FirebaseAuth
     private lateinit var currentUserId: String
+    private val viewModel: RequestsViewModel by viewModels {InjectorUtils.provideRequestsViewModelFactory()}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,18 +65,19 @@ class MainActivity : AppCompatActivity() {
         }
 
         window.statusBarColor = Color.TRANSPARENT
-        DatabaseConnection.init()
+
+        try{
+            DatabaseConnection.init()
+        }
+        catch(e : Exception) {
+            println(e)
+            Toast.makeText(this, "Check your Internet connection", Toast.LENGTH_LONG).show()
+        }
     }
 
     override fun onStart() {
         super.onStart()
-
-        val viewModel = ViewModelProvider(
-            this,
-            InjectorUtils.provideRequestsViewModelFactory()
-        )[RequestsViewModel::class.java]
-
-        viewModel.setUserId(currentUserId)
+        viewModel.userId = currentUserId
     }
 
     override fun onSupportNavigateUp(): Boolean {

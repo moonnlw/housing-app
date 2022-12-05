@@ -17,7 +17,4 @@ class RequestItemViewModel(private val requestsRepository: RequestsRepository) :
         }.also { requestLiveData = it }
     }
 
-    /*private fun updateRequest(userRequest: UserRequest) {
-
-    }*/
 }

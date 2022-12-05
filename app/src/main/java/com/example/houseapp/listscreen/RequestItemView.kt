@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import com.example.houseapp.InjectorUtils
 import com.example.houseapp.R
 import com.example.houseapp.listscreen.RequestAdapter.Companion.REQUEST_KEY
@@ -16,26 +16,18 @@ import com.example.houseapp.listscreen.RequestAdapter.Companion.REQUEST_KEY
  */
 class RequestItemView : Fragment() {
 
-    private lateinit var viewModel: RequestItemViewModel
+    private val viewModel: RequestItemViewModel by viewModels { InjectorUtils.provideRequestsViewModelFactory() }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val view = inflater.inflate(R.layout.fragment_request_info, container, false)
-
-        viewModel = ViewModelProvider(
-            this,
-            InjectorUtils.provideRequestsViewModelFactory()
-        )[RequestItemViewModel::class.java]
-
-        return view
+        return inflater.inflate(R.layout.fragment_request_info, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         val requestId = requireArguments().getInt(REQUEST_KEY)
 
         viewModel.getRequest(requestId).observe(viewLifecycleOwner) { requestItem ->
@@ -45,5 +37,4 @@ class RequestItemView : Fragment() {
                 if (requestItem.isDone) "Done" else "In progress"
         }
     }
-
 }

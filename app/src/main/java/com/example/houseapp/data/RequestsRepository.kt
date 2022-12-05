@@ -1,5 +1,7 @@
 package com.example.houseapp.data
 
+import androidx.lifecycle.MutableLiveData
+
 
 class RequestsRepository private constructor(private val requestDao: RequestDao) {
 
@@ -13,35 +15,27 @@ class RequestsRepository private constructor(private val requestDao: RequestDao)
             }
     }
 
-    //val requests = MutableLiveData<List<UserRequest>>(listOf(UserRequest("4","ff","help")))
-
-    //private fun <T : Any?> MutableLiveData<T>.default(initialValue: T) = apply { postValue(initialValue) }
-
-    //val requests = MutableLiveData<List<UserRequest>>().also { it.postValue(emptyList()) }
+    val requests = MutableLiveData<List<UserRequest>>(emptyList())
 
 //    suspend fun getAllRequests() {
 //        requests.postValue(requestDao.getAllRequests())
 //    }
+//
+//    suspend fun getUserRequests(userId: String) = requestDao.getRequestsByUserID(userId)
 
-    suspend fun getAllRequests() = requestDao.getAllRequests()
+    suspend fun refreshUserRequests(id: String) {
+        val newRequests = requestDao.getRequestsByUserID(id)
+        if (newRequests != requests.value) requests.postValue(newRequests)
+    }
 
-//    suspend fun refreshUserRequests(id: Int) {
-//        val newRequests = requestDao.getRequestsByUserID(id.toString())
+//    suspend fun refreshRequests() {
+//        val newRequests = requestDao.getAllRequests()
 //        if (newRequests != requests.value) requests.postValue(newRequests)
 //    }
 //
-//    suspend fun refreshRequests() {
-//        withContext(Dispatchers.IO) {
-//            val newRequests = requestDao.getAllRequests()
-//            if (newRequests != requests.value) requests.postValue(newRequests)
-//        }
+//    suspend fun addRequest(userRequest: UserRequest) {
+//        requestDao.addNewRequest(userRequest)
 //    }
 
-    suspend fun addRequest(userRequest: UserRequest) {
-        requestDao.addNewRequest(userRequest)
-    }
-
     suspend fun getRequest(id: Int) = requestDao.getRequest(id)
-
-    suspend fun getUserRequests(userId: String) = requestDao.getRequestsByUserID(userId)
 }
