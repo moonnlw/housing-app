@@ -20,8 +20,9 @@ class RequestsViewModel(private val requestsRepository: RequestsRepository) : Vi
 
     private val _requests = requestsRepository.requests
 
+    // TODO check for admin
     private fun refreshRequests() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.Default) {
             requestsRepository.refreshUserRequests(userId)
         }
     }

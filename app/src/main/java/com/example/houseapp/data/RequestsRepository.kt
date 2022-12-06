@@ -1,32 +1,59 @@
 package com.example.houseapp.data
 
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
+import com.example.houseapp.data.local.LocalDatabase
+import com.example.houseapp.data.local.asDomainModel
+import com.example.houseapp.data.remote.RequestDao
 
 
-class RequestsRepository private constructor(private val requestDao: RequestDao) {
+class RequestsRepository private constructor(
+    private val requestDao: RequestDao,
+    private val database: LocalDatabase
+) {
 
     companion object {
         @Volatile
         private var instance: RequestsRepository? = null
 
-        fun getInstance(requestDao: RequestDao) =
+        fun getInstance(requestDao: RequestDao, database: LocalDatabase) =
             instance ?: synchronized(this) {
-                instance ?: RequestsRepository(requestDao).also { instance = it }
+                instance ?: RequestsRepository(requestDao, database).also { instance = it }
             }
     }
 
-    val requests = MutableLiveData<List<UserRequest>>(emptyList())
+    val requests: LiveData<List<UserRequest>> =
+        Transformations.map(database.requestDaoLocal.getAllRequests()) {
+            it.asDomainModel()
+        }
+
+    fun getRequest(id: Int): LiveData<UserRequest> =
+        Transformations.map(database.requestDaoLocal.getRequest(id)) {
+            it.asDomainModel()
+        }
+
+/*    suspend fun refreshUserRequests(id: String) {
+        val newRequests = requestDao.getRequestsByUserID(id)
+        if (newRequests != requests.value) requests.postValue(newRequests)
+    }*/
+
+    suspend fun refreshUserRequests(id: String) {
+        val newRequests = requestDao.getRequestsByUserID(id)
+        database.requestDaoLocal.insertAll(newRequests.asDatabaseModel())
+    }
+
+/*    suspend fun refreshRequests() {
+        val newRequests = requestDao.getAllRequests()
+        database.requestDaoLocal.insertAll(newRequests.asDatabaseModel())
+    }*/
+
+//    val requests = MutableLiveData<List<UserRequest>>(emptyList())
 
 //    suspend fun getAllRequests() {
 //        requests.postValue(requestDao.getAllRequests())
 //    }
 //
 //    suspend fun getUserRequests(userId: String) = requestDao.getRequestsByUserID(userId)
-
-    suspend fun refreshUserRequests(id: String) {
-        val newRequests = requestDao.getRequestsByUserID(id)
-        if (newRequests != requests.value) requests.postValue(newRequests)
-    }
 
 //    suspend fun refreshRequests() {
 //        val newRequests = requestDao.getAllRequests()
@@ -37,5 +64,4 @@ class RequestsRepository private constructor(private val requestDao: RequestDao)
 //        requestDao.addNewRequest(userRequest)
 //    }
 
-    suspend fun getRequest(id: Int) = requestDao.getRequest(id)
 }
