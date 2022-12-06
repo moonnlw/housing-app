@@ -6,8 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import com.example.houseapp.InjectorUtils
+import androidx.fragment.app.activityViewModels
+import com.example.houseapp.AppContainer
+import com.example.houseapp.MyApplication
 import com.example.houseapp.R
 import com.example.houseapp.listscreen.RequestAdapter.Companion.REQUEST_KEY
 
@@ -16,7 +17,8 @@ import com.example.houseapp.listscreen.RequestAdapter.Companion.REQUEST_KEY
  */
 class RequestItemView : Fragment() {
 
-    private val viewModel: RequestItemViewModel by viewModels { InjectorUtils.provideRequestsViewModelFactory() }
+    private lateinit var appContainer: AppContainer
+    private val viewModel: RequestItemViewModel by activityViewModels { appContainer.requestsViewModelFactory }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,6 +30,8 @@ class RequestItemView : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        appContainer = (requireActivity().application as MyApplication).appContainer
+
         val requestId = requireArguments().getInt(REQUEST_KEY)
 
         viewModel.getRequest(requestId).observe(viewLifecycleOwner) { requestItem ->

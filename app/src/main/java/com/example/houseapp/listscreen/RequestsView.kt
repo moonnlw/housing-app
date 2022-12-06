@@ -13,7 +13,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.houseapp.InjectorUtils
+import com.example.houseapp.AppContainer
+import com.example.houseapp.MyApplication
 import com.example.houseapp.R
 import com.example.houseapp.data.UserRequest
 
@@ -23,7 +24,10 @@ import com.example.houseapp.data.UserRequest
 class RequestsListView : Fragment() {
 
     private val viewAdapter: RequestAdapter = RequestAdapter()
-    private val viewModel: RequestsViewModel by activityViewModels { InjectorUtils.provideRequestsViewModelFactory() }
+
+    private lateinit var appContainer: AppContainer
+    private val viewModel: RequestsViewModel by activityViewModels { appContainer.requestsViewModelFactory }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,6 +46,7 @@ class RequestsListView : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        appContainer = (requireActivity().application as MyApplication).appContainer
 
         viewModel.requests.observe(viewLifecycleOwner) { requests ->
             requests?.apply {
@@ -80,7 +85,7 @@ class SpaceItemDecorator : RecyclerView.ItemDecoration() {
 }
 
 
-class RequestAdapter:
+class RequestAdapter :
     RecyclerView.Adapter<RequestAdapter.ViewHolder>() {
 
 

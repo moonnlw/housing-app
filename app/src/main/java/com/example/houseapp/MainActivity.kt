@@ -14,7 +14,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.example.houseapp.data.DatabaseConnection
+import com.example.houseapp.data.remote.DatabaseConnection
 import com.example.houseapp.listscreen.RequestsViewModel
 import com.example.houseapp.loginscreen.LoginActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -27,10 +27,14 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var auth: FirebaseAuth
     private lateinit var currentUserId: String
-    private val viewModel: RequestsViewModel by viewModels {InjectorUtils.provideRequestsViewModelFactory()}
+
+    private lateinit var appContainer: AppContainer
+    private val viewModel: RequestsViewModel by viewModels { appContainer.requestsViewModelFactory }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        appContainer = (application as MyApplication).appContainer
 
         auth = FirebaseAuth.getInstance()
 
@@ -58,7 +62,7 @@ class MainActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination: NavDestination, _ ->
             bottomNavigationView.visibility =
-                when(destination.id) {
+                when (destination.id) {
                     R.id.request -> View.GONE
                     else -> View.VISIBLE
                 }
@@ -66,10 +70,9 @@ class MainActivity : AppCompatActivity() {
 
         window.statusBarColor = Color.TRANSPARENT
 
-        try{
+        try {
             DatabaseConnection.init()
-        }
-        catch(e : Exception) {
+        } catch (e: Exception) {
             println(e)
             Toast.makeText(this, "Check your Internet connection", Toast.LENGTH_LONG).show()
         }
