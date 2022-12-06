@@ -5,6 +5,7 @@ import androidx.lifecycle.Transformations
 import com.example.houseapp.data.local.LocalDatabase
 import com.example.houseapp.data.local.asDomainModel
 import com.example.houseapp.data.remote.RequestDao
+import com.example.houseapp.utils.NetworkConnection
 
 
 class RequestsRepository private constructor(
@@ -38,8 +39,10 @@ class RequestsRepository private constructor(
     }*/
 
     suspend fun refreshUserRequests(id: String) {
-        val newRequests = requestDao.getRequestsByUserID(id)
-        database.requestDaoLocal.insertAll(newRequests.asDatabaseModel())
+        if (NetworkConnection.isNetworkAvailable) {
+            val newRequests = requestDao.getRequestsByUserID(id)
+            database.requestDaoLocal.insertAll(newRequests.asDatabaseModel())
+        }
     }
 
 /*    suspend fun refreshRequests() {
@@ -60,8 +63,7 @@ class RequestsRepository private constructor(
 //        if (newRequests != requests.value) requests.postValue(newRequests)
 //    }
 //
-//    suspend fun addRequest(userRequest: UserRequest) {
-//        requestDao.addNewRequest(userRequest)
-//    }
-
+/*    suspend fun addRequest(userRequest: UserRequest) {
+        requestDao.addNewRequest(userRequest)
+    }*/
 }

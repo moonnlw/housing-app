@@ -1,4 +1,4 @@
-package com.example.houseapp.data.remote
+package com.example.houseapp.utils
 
 import android.os.StrictMode
 import kotlinx.coroutines.Dispatchers
@@ -18,5 +18,5 @@ object DatabaseConnection {
     }
 
     suspend fun <T> dbQuery(block: suspend () -> T): T =
-        newSuspendedTransaction(Dispatchers.IO) { block() }
+         newSuspendedTransaction(Dispatchers.IO) { block() }
 }

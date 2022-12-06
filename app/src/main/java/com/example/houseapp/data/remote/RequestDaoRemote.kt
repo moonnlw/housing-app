@@ -1,7 +1,7 @@
 package com.example.houseapp.data.remote
 
 import com.example.houseapp.data.UserRequest
-import com.example.houseapp.data.remote.DatabaseConnection.dbQuery
+import com.example.houseapp.utils.DatabaseConnection.dbQuery
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 

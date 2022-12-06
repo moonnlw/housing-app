@@ -14,9 +14,10 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.example.houseapp.data.remote.DatabaseConnection
+import com.example.houseapp.utils.DatabaseConnection
 import com.example.houseapp.listscreen.RequestsViewModel
 import com.example.houseapp.loginscreen.LoginActivity
+import com.example.houseapp.utils.NetworkConnection
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 
@@ -70,11 +71,12 @@ class MainActivity : AppCompatActivity() {
 
         window.statusBarColor = Color.TRANSPARENT
 
-        try {
+        if (NetworkConnection.isNetworkAvailable(applicationContext)) {
+            NetworkConnection.isNetworkAvailable = true
+
             DatabaseConnection.init()
-        } catch (e: Exception) {
-            println(e)
-            Toast.makeText(this, "Check your Internet connection", Toast.LENGTH_LONG).show()
+        } else {
+            Toast.makeText(this, "No Internet access available", Toast.LENGTH_LONG).show()
         }
     }
 
