@@ -1,4 +1,4 @@
-package com.example.houseapp
+package com.example.houseapp.data.remote
 
 import org.jetbrains.exposed.sql.Table
 

@@ -1,4 +1,4 @@
-package com.example.houseapp.data
+package com.example.houseapp.data.remote
 
 import android.os.StrictMode
 import kotlinx.coroutines.Dispatchers

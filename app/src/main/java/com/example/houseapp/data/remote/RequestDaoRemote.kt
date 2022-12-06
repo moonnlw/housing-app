@@ -1,11 +1,11 @@
-package com.example.houseapp.data
+package com.example.houseapp.data.remote
 
-import com.example.houseapp.UserRequests
-import com.example.houseapp.data.DatabaseConnection.dbQuery
+import com.example.houseapp.data.UserRequest
+import com.example.houseapp.data.remote.DatabaseConnection.dbQuery
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 
-class RequestDaoImpl : RequestDao {
+class RequestDaoRemote : RequestDao {
     private fun resultRowToRequest(row: ResultRow) = UserRequest(
         requestId = row[UserRequests.requestId],
         userId = row[UserRequests.userId],
@@ -32,15 +32,15 @@ class RequestDaoImpl : RequestDao {
     }
 
     override suspend fun deleteRequest(id: Int): Boolean = dbQuery {
-        UserRequests.deleteWhere { UserRequests.requestId eq id } > 0
+        UserRequests.deleteWhere { requestId eq id } > 0
     }
 
     override suspend fun addNewRequest(userRequest: UserRequest): UserRequest? = dbQuery {
         val insertStatement = UserRequests.insert {
-            it[UserRequests.userId] = userRequest.userId
-            it[UserRequests.problemType] = userRequest.problemType
-            it[UserRequests.description] = userRequest.description
-            it[UserRequests.isDone] = userRequest.isDone
+            it[userId] = userRequest.userId
+            it[problemType] = userRequest.problemType
+            it[description] = userRequest.description
+            it[isDone] = userRequest.isDone
         }
 
         insertStatement.resultedValues?.singleOrNull()?.let(::resultRowToRequest)

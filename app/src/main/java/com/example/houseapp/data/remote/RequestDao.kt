@@ -1,4 +1,6 @@
-package com.example.houseapp.data
+package com.example.houseapp.data.remote
+
+import com.example.houseapp.data.UserRequest
 
 
 interface RequestDao {
