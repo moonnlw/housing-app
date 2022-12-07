@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -18,12 +17,6 @@ import com.example.houseapp.AppContainer
 import com.example.houseapp.MyApplication
 import com.example.houseapp.R
 import com.example.houseapp.data.UserRequest
-import com.example.houseapp.UserRequest
-import com.example.houseapp.UserRequests
-import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
-import org.jetbrains.exposed.sql.select
-import org.jetbrains.exposed.sql.transactions.transaction
-import java.sql.SQLException
 
 /**
  * Показывает список запросов пользователя

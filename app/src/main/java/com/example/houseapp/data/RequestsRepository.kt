@@ -63,7 +63,7 @@ class RequestsRepository private constructor(
 //        if (newRequests != requests.value) requests.postValue(newRequests)
 //    }
 //
-/*    suspend fun addRequest(userRequest: UserRequest) {
+   suspend fun addRequest(userRequest: UserRequest) {
         requestDao.addNewRequest(userRequest)
-    }*/
+    }
 }

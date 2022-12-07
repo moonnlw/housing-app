@@ -1,7 +1,5 @@
 package com.example.houseapp
 
-import com.example.houseapp.UserRequests.autoIncrement
-import com.example.houseapp.UserRequests.default
 import org.jetbrains.exposed.sql.Table
 
 object Roles : Table() {

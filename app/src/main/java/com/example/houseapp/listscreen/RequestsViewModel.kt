@@ -32,8 +32,9 @@ class RequestsViewModel(private val requestsRepository: RequestsRepository) : Vi
             requestsRepository.addRequest(userRequest)
         }
     }*/
+}
 
-class UserViewModel : ViewModel() {
+/*class UserViewModel : ViewModel() {
     private var userId: String = ""
 
     fun setUserId(id: String) {
@@ -43,4 +44,4 @@ class UserViewModel : ViewModel() {
     fun getUserId(): String {
         return userId
     }
-}
+}*/

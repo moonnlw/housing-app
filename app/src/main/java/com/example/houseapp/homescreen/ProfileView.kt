@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.houseapp.R
-import com.example.houseapp.User
+import com.example.houseapp.data.User
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_profile.view.*
 import java.io.File

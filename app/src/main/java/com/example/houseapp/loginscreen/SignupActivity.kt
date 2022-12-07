@@ -9,6 +9,7 @@ import android.widget.EditText
 import android.widget.Toast
 import com.example.houseapp.MainActivity
 import com.example.houseapp.R
+import com.example.houseapp.Roles
 //import com.example.houseapp.loginscreen.LoginView
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
