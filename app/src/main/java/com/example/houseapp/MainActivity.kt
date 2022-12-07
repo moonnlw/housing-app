@@ -20,23 +20,28 @@ import com.example.houseapp.loginscreen.LoginActivity
 import com.example.houseapp.utils.NetworkConnection
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.example.houseapp.listscreen.UserViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
+import org.jetbrains.exposed.sql.*
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
+import org.jetbrains.exposed.sql.transactions.transaction
 
 
 class MainActivity : AppCompatActivity() {
-
+    private val viewModel: UserViewModel by viewModels()
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var auth: FirebaseAuth
     private lateinit var currentUserId: String
-
     private lateinit var appContainer: AppContainer
     private val viewModel: RequestsViewModel by viewModels { appContainer.requestsViewModelFactory }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         appContainer = (application as MyApplication).appContainer
 
+        //createDatabaseConnection()
         auth = FirebaseAuth.getInstance()
 
         if (auth.currentUser == null) {
@@ -45,6 +50,20 @@ class MainActivity : AppCompatActivity() {
             finish()
         } else {
             currentUserId = auth.currentUser!!.uid
+            val currentUserId = auth.currentUser!!.uid
+
+            /*var isAdmin = false
+            transaction {
+                isAdmin = Roles.select { Roles.userId eq currentUserId }.single()[Roles.isAdmin]
+            }
+
+            if (isAdmin) {
+                Toast.makeText(this, "Admin", Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(this, "User", Toast.LENGTH_LONG).show()
+            }*/
+
+            viewModel.setUserId(currentUserId);
         }
 
         setContentView(R.layout.activity_main)
@@ -73,7 +92,6 @@ class MainActivity : AppCompatActivity() {
 
         if (NetworkConnection.isNetworkAvailable(applicationContext)) {
             NetworkConnection.isNetworkAvailable = true
-
             DatabaseConnection.init()
         } else {
             Toast.makeText(this, "No Internet access available", Toast.LENGTH_LONG).show()

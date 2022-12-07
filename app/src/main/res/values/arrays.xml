@@ -2,7 +2,11 @@
 <resources>
     <string-array name="type_items">
         <item>Insects</item>
-        <item>Plumbery</item>
+        <item>Plumbing</item>
+        <item>Heating</item>
+        <item>Mildew</item>
+        <item>Roofing</item>
+        <item>Electricity</item>
         <item>Other</item>
     </string-array>
 </resources>

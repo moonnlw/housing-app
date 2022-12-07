@@ -32,4 +32,15 @@ class RequestsViewModel(private val requestsRepository: RequestsRepository) : Vi
             requestsRepository.addRequest(userRequest)
         }
     }*/
+
+class UserViewModel : ViewModel() {
+    private var userId: String = ""
+
+    fun setUserId(id: String) {
+        userId = id;
+    }
+
+    fun getUserId(): String {
+        return userId
+    }
 }

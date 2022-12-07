@@ -7,5 +7,5 @@ object UserRequests : Table() {
     val problemType = varchar("problemtype", 50)
     val description = varchar("description", 1000)
     val requestId = integer("requestid").autoIncrement("seq")
-    val isDone = bool("isdone")
+    val isDone = bool("isdone").default(false)
 }
