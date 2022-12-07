@@ -6,10 +6,10 @@ import com.example.houseapp.data.UserRequest
 
 @Entity
 data class DatabaseRequest constructor(
-    @PrimaryKey
     val userId: String,
     val problemType: String,
     val description: String,
+    @PrimaryKey
     val requestId: Int,
     val isDone: Boolean
 )
