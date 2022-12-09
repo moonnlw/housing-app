@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
@@ -18,44 +19,39 @@ import com.example.houseapp.utils.DatabaseConnection
 import com.example.houseapp.listscreen.RequestsViewModel
 import com.example.houseapp.loginscreen.LoginActivity
 import com.example.houseapp.utils.NetworkConnection
+import com.example.houseapp.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var auth: FirebaseAuth
     private lateinit var currentUserId: String
     private lateinit var appContainer: AppContainer
-    private val viewModel: RequestsViewModel by viewModels { appContainer.requestsViewModelFactory }
+    private val requestsViewModel by viewModels<RequestsViewModel> { appContainer.requestsViewModelFactory }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         appContainer = (application as MyApplication).appContainer
-        auth = FirebaseAuth.getInstance()
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        authorize()
+        initializeUI()
+        connectToDatabase()
+    }
 
-        if (auth.currentUser == null) {
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
-            finish()
-        } else {
-            currentUserId = auth.currentUser!!.uid
+    override fun onStart() {
+        super.onStart()
+        requestsViewModel.userId = currentUserId
+    }
 
-            /*var isAdmin = false
-            transaction {
-                isAdmin = Roles.select { Roles.userId eq currentUserId }.single()[Roles.isAdmin]
-            }
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp(appBarConfiguration)
+    }
 
-            if (isAdmin) {
-                Toast.makeText(this, "Admin", Toast.LENGTH_LONG).show()
-            } else {
-                Toast.makeText(this, "User", Toast.LENGTH_LONG).show()
-            }*/
-        }
-
-        setContentView(R.layout.activity_main)
-
+    private fun initializeUI() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_container) as NavHostFragment
         navController = navHostFragment.navController
@@ -77,21 +73,26 @@ class MainActivity : AppCompatActivity() {
         }
 
         window.statusBarColor = Color.TRANSPARENT
+    }
 
+    private fun authorize() {
+        val auth = FirebaseAuth.getInstance()
+
+        if (auth.currentUser == null) {
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+        } else {
+            currentUserId = auth.currentUser!!.uid
+        }
+    }
+
+    private fun connectToDatabase() {
         if (NetworkConnection.isNetworkAvailable(applicationContext)) {
             NetworkConnection.isNetworkAvailable = true
             DatabaseConnection.init()
         } else {
             Toast.makeText(this, "No Internet access available", Toast.LENGTH_LONG).show()
         }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        viewModel.userId = currentUserId
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        return navController.navigateUp(appBarConfiguration)
     }
 }
