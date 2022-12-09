@@ -1,97 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="12dp"
-    tools:context="com.example.houseapp.newrequestscreen.CreateRequestView">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <com.google.android.material.card.MaterialCardView
-        style="@style/Widget.HouseApp.CardView"
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="12dp"
+        tools:context="com.example.houseapp.newrequestscreen.CreateRequestView">
 
-        android:layout_marginBottom="12dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="16dp"
-            android:orientation="vertical">
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/descriptionInput"
-                style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp">
-
-                <AutoCompleteTextView
-                    android:id="@+id/selectType"
-                    style="@style/RequestInfo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/problem_type"
-                    android:inputType="none"
-                    app:simpleItems="@array/type_items" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
-
-
-    <com.google.android.material.card.MaterialCardView
-        style="@style/Widget.HouseApp.CardView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-
-        android:layout_marginBottom="10dp">
-
-        <LinearLayout
+        <com.google.android.material.card.MaterialCardView
+            style="@style/Widget.HouseApp.CardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="2dp"
-            android:orientation="horizontal">
 
-            <com.google.android.material.textfield.TextInputLayout
+            android:layout_marginBottom="12dp">
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="293dp"
-                android:gravity="top"
-                app:counterEnabled="true"
-                app:counterMaxLength="300"
-                app:endIconDrawable="@drawable/ic_outline_clear"
-                app:endIconMode="clear_text"
-                app:errorEnabled="true">
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="16dp"
+                android:orientation="vertical">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/descriptionInputField"
-                    style="@style/RequestInfo"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/descriptionInput"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="match_parent"
-                    android:layout_height="257dp"
-                    android:gravity="top|start"
-                    android:hint="@string/message"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp">
 
-                    android:lineSpacingMultiplier="1.2"
-                    app:helperTextEnabled="true" />
-            </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
+                    <AutoCompleteTextView
+                        android:id="@+id/selectType"
+                        style="@style/RequestInfo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/problem_type"
+                        android:inputType="none"
+                        app:simpleItems="@array/type_items" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-    </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
-    <Button
-        android:id="@+id/elevatedButton"
-        style="@style/Widget.Material3.Button.ElevatedButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:text="@string/send_request" />
 
-</androidx.appcompat.widget.LinearLayoutCompat>
+        <com.google.android.material.card.MaterialCardView
+            style="@style/Widget.HouseApp.CardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:layout_marginBottom="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="2dp"
+                android:orientation="horizontal">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="293dp"
+                    android:gravity="top"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="300"
+                    app:endIconDrawable="@drawable/ic_outline_clear"
+                    app:endIconMode="clear_text"
+                    app:errorEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/descriptionInputField"
+                        style="@style/RequestInfo"
+                        android:layout_width="match_parent"
+                        android:layout_height="257dp"
+                        android:gravity="top|start"
+                        android:hint="@string/message"
+
+                        android:lineSpacingMultiplier="1.2"
+                        app:helperTextEnabled="true" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <Button
+            android:id="@+id/elevatedButton"
+            style="@style/Widget.Material3.Button.ElevatedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="@string/send_request" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</layout>

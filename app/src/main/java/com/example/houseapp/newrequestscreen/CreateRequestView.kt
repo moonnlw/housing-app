@@ -6,14 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.houseapp.AppContainer
 import com.example.houseapp.MyApplication
 import com.example.houseapp.R
 import com.example.houseapp.data.remote.UserRequests
+import com.example.houseapp.databinding.FragmentCreateRequestBinding
 import com.example.houseapp.listscreen.RequestsViewModel
-import kotlinx.android.synthetic.main.fragment_create_request.view.*
 import org.jetbrains.exposed.sql.addLogger
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.transactions.transaction
@@ -23,7 +24,7 @@ import java.sql.SQLException
  * Форма создания новой заявки
  */
 class CreateRequestView : Fragment() {
-    private lateinit var viewOfLayout: View
+    private lateinit var b: FragmentCreateRequestBinding
     private lateinit var appContainer: AppContainer
     private val userViewModel: RequestsViewModel by activityViewModels { appContainer.requestsViewModelFactory }
 
@@ -31,11 +32,19 @@ class CreateRequestView : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        viewOfLayout = inflater.inflate(R.layout.fragment_create_request, container, false)
-        viewOfLayout.elevatedButton.setOnClickListener {
+        b = DataBindingUtil.inflate(inflater, R.layout.fragment_create_request, container, false)
+        return b.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        appContainer = (requireActivity().application as MyApplication).appContainer
+        (activity as AppCompatActivity).supportActionBar?.title = "Create new request"
+
+        b.elevatedButton.setOnClickListener {
             val userId = userViewModel.userId
-            val selectedType = viewOfLayout.selectType.text.toString()
-            val description = viewOfLayout.descriptionInputField.text.toString()
+            val selectedType = b.selectType.text.toString()
+            val description = b.descriptionInputField.text.toString()
             if (selectedType.isEmpty() || description.isEmpty()) {
                 Toast.makeText(activity, "Please fill all fields before send a request", Toast.LENGTH_LONG).show()
             }
@@ -59,12 +68,5 @@ class CreateRequestView : Fragment() {
                 }
             }
         }
-        return viewOfLayout
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        appContainer = (requireActivity().application as MyApplication).appContainer
-        (activity as AppCompatActivity).supportActionBar?.title = "Create new request"
     }
 }

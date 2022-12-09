@@ -4,12 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.houseapp.AppContainer
 import com.example.houseapp.MyApplication
 import com.example.houseapp.R
+import com.example.houseapp.databinding.FragmentRequestInfoBinding
 import com.example.houseapp.listscreen.RequestAdapter.Companion.REQUEST_KEY
 
 /**
@@ -17,6 +18,7 @@ import com.example.houseapp.listscreen.RequestAdapter.Companion.REQUEST_KEY
  */
 class RequestItemView : Fragment() {
 
+    private lateinit var b: FragmentRequestInfoBinding
     private lateinit var appContainer: AppContainer
     private val viewModel: RequestItemViewModel by activityViewModels { appContainer.requestsViewModelFactory }
 
@@ -25,7 +27,8 @@ class RequestItemView : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.fragment_request_info, container, false)
+        b = DataBindingUtil.inflate(inflater, R.layout.fragment_request_info, container, false)
+        return b.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -35,10 +38,9 @@ class RequestItemView : Fragment() {
         val requestId = requireArguments().getInt(REQUEST_KEY)
 
         viewModel.getRequest(requestId).observe(viewLifecycleOwner) { requestItem ->
-            view.findViewById<TextView>(R.id.info_message).text = requestItem.description
-            view.findViewById<TextView>(R.id.info_problemType).text = requestItem.problemType
-            view.findViewById<TextView>(R.id.info_status).text =
-                if (requestItem.isDone) "Done" else "In progress"
+            b.infoMessage.text = requestItem.description
+            b.infoProblemType.text = requestItem.problemType
+            b.infoStatus.text = if (requestItem.isDone) "Done" else "In progress"
         }
     }
 }

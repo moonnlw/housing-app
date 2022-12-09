@@ -1,235 +1,237 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.example.houseapp.listscreen.RequestItemView">
-
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/info_card"
-        style="@style/Widget.HouseApp.CardView"
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:layout_margin="12dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context="com.example.houseapp.listscreen.RequestItemView">
 
-        <LinearLayout
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/info_card"
+            style="@style/Widget.HouseApp.CardView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginVertical="8.5dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="10dp"
-            android:orientation="vertical">
+            android:layout_height="180dp"
+            android:layout_margin="12dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center_vertical">
+                android:layout_height="match_parent"
+                android:layout_marginVertical="8.5dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="10dp"
+                android:orientation="vertical">
 
-                <com.google.android.material.textview.MaterialTextView
-                    style="@style/RequestInfo.Headers"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/rounded_text"
-                    android:text="@string/problem_type" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/info_problemType"
-                    style="@style/RequestInfo.Headers"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="" />
-            </LinearLayout>
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center_vertical">
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/RequestInfo.Headers"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rounded_text"
+                        android:text="@string/problem_type" />
 
-                <com.google.android.material.textview.MaterialTextView
-                    style="@style/RequestInfo.Headers"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/rounded_text"
-                    android:text="@string/address" />
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/info_problemType"
+                        style="@style/RequestInfo.Headers"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="" />
+                </LinearLayout>
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/info_address"
-                    style="@style/RequestInfo.Headers"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="" />
-            </LinearLayout>
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical">
 
-            <LinearLayout
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/RequestInfo.Headers"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rounded_text"
+                        android:text="@string/address" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/info_address"
+                        style="@style/RequestInfo.Headers"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/RequestInfo.Headers"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rounded_text"
+                        android:text="@string/from" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/info_from"
+                        style="@style/RequestInfo"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/RequestInfo.Headers"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rounded_text"
+                        android:text="@string/info_status" />
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/info_status"
+                        style="@style/RequestInfo.Headers"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <com.google.android.material.card.MaterialCardView
+            style="@style/Widget.HouseApp.CardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginBottom="12dp">
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center_vertical">
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="11dp"
+                android:orientation="vertical">
 
                 <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/info_message_word"
                     style="@style/RequestInfo.Headers"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+
+                    android:layout_marginStart="6dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_marginBottom="6dp"
                     android:background="@drawable/rounded_text"
-                    android:text="@string/from" />
+                    android:gravity="start"
+                    android:text="@string/message"
+                    android:textAlignment="gravity" />
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/info_from"
+                    android:id="@+id/info_message"
                     style="@style/RequestInfo"
-
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/info_message_word"
+                    android:layout_marginHorizontal="8dp"
+                    android:lineSpacingMultiplier="1.2"
+                    android:maxLines="8"
                     android:text="" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
 
                 <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/request_date"
+                    style="@style/RequestInfoSmallLine"
+                    android:layout_width="match_parent"
+                    android:layout_height="16dp"
+                    android:layout_below="@id/info_message"
+                    android:layout_marginEnd="5dp"
+                    android:gravity="end"
+
+                    android:text="@string/info_date_sample" />
+            </RelativeLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <com.google.android.material.card.MaterialCardView
+            style="@style/Widget.HouseApp.CardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="12dp"
+            android:layout_marginBottom="12dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="12dp"
+                android:orientation="vertical">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/info_answer_word"
                     style="@style/RequestInfo.Headers"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+
+                    android:layout_marginStart="6dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginEnd="6dp"
+                    android:layout_marginBottom="6dp"
                     android:background="@drawable/rounded_text"
-                    android:text="@string/info_status" />
+                    android:gravity="start"
+                    android:text="@string/answer"
+                    android:textAlignment="gravity" />
 
                 <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/info_status"
-                    style="@style/RequestInfo.Headers"
+                    android:id="@+id/info_answer"
+                    style="@style/RequestInfo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/info_answer_word"
+                    android:layout_marginHorizontal="8dp"
+                    android:lineSpacingMultiplier="1.2"
+                    android:maxLines="9"
                     android:text="" />
-            </LinearLayout>
 
-        </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/request_answer_date"
+                    style="@style/RequestInfoSmallLine"
+                    android:layout_width="match_parent"
+                    android:layout_height="16dp"
+                    android:layout_below="@id/info_answer"
+                    android:layout_marginEnd="5dp"
+                    android:gravity="end|top"
 
 
-    <com.google.android.material.card.MaterialCardView
-        style="@style/Widget.HouseApp.CardView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="12dp"
-        android:layout_marginBottom="12dp">
+                    android:text="@string/info_date_sample" />
+            </RelativeLayout>
 
-        <RelativeLayout
+        </com.google.android.material.card.MaterialCardView>
+
+        <!--<androidx.fragment.app.FragmentContainerView
+            android:id="@+id/request_answer_container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="11dp"
-            android:orientation="vertical">
+            android:layout_height="0dp"
+            android:layout_weight="1" /> -->
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/info_message_word"
-                style="@style/RequestInfo.Headers"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-
-                android:layout_marginStart="6dp"
-                android:layout_marginTop="6dp"
-                android:layout_marginEnd="6dp"
-                android:layout_marginBottom="6dp"
-                android:background="@drawable/rounded_text"
-                android:gravity="start"
-                android:text="@string/message"
-                android:textAlignment="gravity" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/info_message"
-                style="@style/RequestInfo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/info_message_word"
-                android:layout_marginHorizontal="8dp"
-                android:lineSpacingMultiplier="1.2"
-                android:maxLines="8"
-                android:text="" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/request_date"
-                style="@style/RequestInfoSmallLine"
-                android:layout_width="match_parent"
-                android:layout_height="16dp"
-                android:layout_below="@id/info_message"
-                android:layout_marginEnd="5dp"
-                android:gravity="end"
-
-                android:text="@string/info_date_sample" />
-        </RelativeLayout>
-
-    </com.google.android.material.card.MaterialCardView>
-
-
-    <com.google.android.material.card.MaterialCardView
-        style="@style/Widget.HouseApp.CardView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="12dp"
-        android:layout_marginBottom="12dp">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="12dp"
-            android:orientation="vertical">
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/info_answer_word"
-                style="@style/RequestInfo.Headers"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-
-                android:layout_marginStart="6dp"
-                android:layout_marginTop="6dp"
-                android:layout_marginEnd="6dp"
-                android:layout_marginBottom="6dp"
-                android:background="@drawable/rounded_text"
-                android:gravity="start"
-                android:text="@string/answer"
-                android:textAlignment="gravity" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/info_answer"
-                style="@style/RequestInfo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/info_answer_word"
-                android:layout_marginHorizontal="8dp"
-                android:lineSpacingMultiplier="1.2"
-                android:maxLines="9"
-                android:text="" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/request_answer_date"
-                style="@style/RequestInfoSmallLine"
-                android:layout_width="match_parent"
-                android:layout_height="16dp"
-                android:layout_below="@id/info_answer"
-                android:layout_marginEnd="5dp"
-                android:gravity="end|top"
-
-
-                android:text="@string/info_date_sample" />
-        </RelativeLayout>
-
-    </com.google.android.material.card.MaterialCardView>
-
-    <!--<androidx.fragment.app.FragmentContainerView
-        android:id="@+id/request_answer_container"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" /> -->
-
-</androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</layout>
