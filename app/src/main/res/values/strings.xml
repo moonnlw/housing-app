@@ -34,4 +34,5 @@
     <string name="signup_btn">Регистрация</string>
     <string name="password_hint">Пароль</string>
     <string name="email_hint">E-mail</string>
+    <string name="or_ru">или</string>
 </resources>
