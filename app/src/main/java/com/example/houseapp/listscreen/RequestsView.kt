@@ -29,6 +29,7 @@ class RequestsListView : Fragment() {
 
     private var viewModelAdapter: RequestAdapter? = null
     private lateinit var appContainer: AppContainer
+    private lateinit var binding: FragmentRequestsListBinding
     private val requestsViewModel: RequestsViewModel by activityViewModels { appContainer.requestsViewModelFactory }
 
     override fun onCreateView(
@@ -37,7 +38,7 @@ class RequestsListView : Fragment() {
     ): View {
         appContainer = (requireActivity().application as MyApplication).appContainer
 
-        val binding = DataBindingUtil.inflate<FragmentRequestsListBinding>(
+        binding = DataBindingUtil.inflate<FragmentRequestsListBinding>(
             inflater,
             R.layout.fragment_requests_list,
             container,
@@ -51,10 +52,12 @@ class RequestsListView : Fragment() {
         /**
          * Создание адаптера, принимает класс RequestClickListener, блок которого выполняется при вызове метода onClick
          */
-        viewModelAdapter = RequestAdapter(RequestClickListener {
-            val bundle = bundleOf(REQUEST_KEY to it.requestId)
-            findNavController().navigate(R.id.action_requests_to_one, bundle)
-        })
+        viewModelAdapter = RequestAdapter(
+            RequestClickListener {
+                val bundle = bundleOf(REQUEST_KEY to it.requestId)
+                findNavController().navigate(R.id.action_requests_to_one, bundle)
+            }
+        )
 
         /**
          * Привязка RecyclerView к адаптеру, настройка RecyclerView

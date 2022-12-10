@@ -1,6 +1,7 @@
 package com.example.houseapp.listscreen
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.houseapp.data.RequestsRepository
@@ -20,28 +21,17 @@ class RequestsViewModel(private val requestsRepository: RequestsRepository) : Vi
 
     private val _requests = requestsRepository.requests
 
+    val isLoading: LiveData<Boolean>
+        get() = _isLoading
+
+    private val _isLoading = MutableLiveData(false)
+
     // TODO check for admin
-    private fun refreshRequests() {
+    fun refreshRequests() {
+        _isLoading.value = true
         viewModelScope.launch(Dispatchers.Default) {
             requestsRepository.refreshUserRequests(userId)
+            _isLoading.postValue(false)
         }
     }
-
-    /*fun addRequest(userRequest: UserRequest) {
-        viewModelScope.launch(Dispatchers.IO) {
-            requestsRepository.addRequest(userRequest)
-        }
-    }*/
 }
-
-/*class UserViewModel : ViewModel() {
-    private var userId: String = ""
-
-    fun setUserId(id: String) {
-        userId = id;
-    }
-
-    fun getUserId(): String {
-        return userId
-    }
-}*/
