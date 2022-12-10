@@ -7,49 +7,76 @@ import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.core.os.bundleOf
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.houseapp.AppContainer
 import com.example.houseapp.MyApplication
 import com.example.houseapp.R
 import com.example.houseapp.data.UserRequest
+import com.example.houseapp.databinding.FragmentRequestsListBinding
+import com.example.houseapp.databinding.ListViewItemBinding
+import com.example.houseapp.listscreen.RequestAdapter.Companion.REQUEST_KEY
 
 /**
  * Показывает список запросов пользователя
  */
 class RequestsListView : Fragment() {
 
-    private val viewAdapter: RequestAdapter = RequestAdapter()
-
+    private var viewModelAdapter: RequestAdapter? = null
     private lateinit var appContainer: AppContainer
-    private val viewModel: RequestsViewModel by activityViewModels { appContainer.requestsViewModelFactory }
+    private val requestsViewModel: RequestsViewModel by activityViewModels { appContainer.requestsViewModelFactory }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
+        appContainer = (requireActivity().application as MyApplication).appContainer
 
-        val view = inflater.inflate(R.layout.fragment_requests_list, container, false)
+        val binding = DataBindingUtil.inflate<FragmentRequestsListBinding>(
+            inflater,
+            R.layout.fragment_requests_list,
+            container,
+            false
+        ).apply {
+            // Устанавливаем lifecycleOwner, чтобы binding мог прослушивать LiveData
+            lifecycleOwner = viewLifecycleOwner
+            viewModel = requestsViewModel
+        }
 
-        view.findViewById<RecyclerView>(R.id.requests_list).run {
+        /**
+         * Создание адаптера, принимает класс RequestClickListener, блок которого выполняется при вызове метода onClick
+         */
+        viewModelAdapter = RequestAdapter(RequestClickListener {
+            val bundle = bundleOf(REQUEST_KEY to it.requestId)
+            findNavController().navigate(R.id.action_requests_to_one, bundle)
+        })
+
+        /**
+         * Привязка RecyclerView к адаптеру, настройка RecyclerView
+         */
+        binding.root.findViewById<RecyclerView>(R.id.requests_list).apply {
+            layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
-            adapter = viewAdapter
+            adapter = viewModelAdapter
             addItemDecoration(SpaceItemDecorator())
         }
-        return view
+
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        appContainer = (requireActivity().application as MyApplication).appContainer
-
-        viewModel.requests.observe(viewLifecycleOwner) { requests ->
+        /**
+         * Прослушивание LiveData из requestsViewModel и привязка к адаптеру
+         */
+        requestsViewModel.requests.observe(viewLifecycleOwner) { requests ->
             requests?.apply {
-                viewAdapter.requestSet = requests
+                viewModelAdapter?.requestSet = requests
             }
         }
     }
@@ -83,10 +110,18 @@ class SpaceItemDecorator : RecyclerView.ItemDecoration() {
     }
 }
 
+/**
+ * Класс для обработки нажатия на элемент адаптера
+ */
+class RequestClickListener(val block: (UserRequest) -> Unit) {
+    fun onClick(request: UserRequest) = block(request)
+}
 
-class RequestAdapter :
+/**
+ * Адаптер применяет data binding к каждому элементу requestSet
+ */
+class RequestAdapter(private val callback: RequestClickListener) :
     RecyclerView.Adapter<RequestAdapter.ViewHolder>() {
-
 
     var requestSet: List<UserRequest> = emptyList()
         @SuppressLint("NotifyDataSetChanged")
@@ -95,49 +130,33 @@ class RequestAdapter :
             notifyDataSetChanged()
         }
 
-    /**
-     * Класс хранит ссылки на view для каждого элемента данных
-     */
-    class ViewHolder(val item: View) : RecyclerView.ViewHolder(item)
-
+    class ViewHolder(val viewDataBinding: ListViewItemBinding) :
+        RecyclerView.ViewHolder(viewDataBinding.root)
 
     /**
-     * Создает views
+     * Создает ViewHolder
      */
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): ViewHolder {
-
-        val itemView = LayoutInflater.from(parent.context)
-            .inflate(R.layout.list_view_item, parent, false)
-
-        return ViewHolder(itemView)
+        val binding: ListViewItemBinding = DataBindingUtil.inflate(
+            LayoutInflater.from(parent.context),
+            R.layout.list_view_item, parent, false
+        )
+        return ViewHolder(binding)
     }
 
     /**
-     * Подставлет значения полей элемента Request с индексом position во View
+     * Передает UserRequest с индексом position в переменные list_item_view.xml, тем самым обновляет их содержимое
      */
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
-        val item = requestSet[position]
-
-        holder.item.findViewById<TextView>(R.id.request_problemType).text = item.problemType
-        holder.item.findViewById<TextView>(R.id.request_text).text = item.description
-        holder.item.findViewById<TextView>(R.id.request_status).text =
-            if (item.isDone) "done" else "in progress"
-
-        holder.item.setOnClickListener {
-            val bundle = bundleOf(REQUEST_KEY to item.requestId)
-
-            holder.item.findNavController().navigate(
-                R.id.action_requests_to_one,
-                bundle
-            )
+        holder.viewDataBinding.also {
+            it.request = requestSet[position]
+            it.requestCallback = callback
         }
     }
-
 
     override fun getItemCount() = requestSet.size
 

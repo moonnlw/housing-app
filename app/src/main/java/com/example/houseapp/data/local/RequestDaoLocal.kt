@@ -12,7 +12,7 @@ interface RequestDaoLocal {
     fun getAllRequests():LiveData<List<DatabaseRequest>>
 
     @Query("SELECT * FROM databaserequest WHERE requestId = :id")
-    fun getRequest(id: Int): LiveData<DatabaseRequest>
+    fun getRequest(id: Int): DatabaseRequest
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(requests: List<DatabaseRequest>)

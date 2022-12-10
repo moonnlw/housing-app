@@ -18,29 +18,30 @@ import com.example.houseapp.listscreen.RequestAdapter.Companion.REQUEST_KEY
  */
 class RequestItemView : Fragment() {
 
-    private lateinit var b: FragmentRequestInfoBinding
+    private lateinit var binding: FragmentRequestInfoBinding
     private lateinit var appContainer: AppContainer
-    private val viewModel: RequestItemViewModel by activityViewModels { appContainer.requestsViewModelFactory }
+    private val itemViewModel: RequestItemViewModel by activityViewModels { appContainer.requestsViewModelFactory }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        b = DataBindingUtil.inflate(inflater, R.layout.fragment_request_info, container, false)
-        return b.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         appContainer = (requireActivity().application as MyApplication).appContainer
+        itemViewModel.requestId = requireArguments().getInt(REQUEST_KEY)
 
-        val requestId = requireArguments().getInt(REQUEST_KEY)
+        binding =
+            DataBindingUtil.inflate<FragmentRequestInfoBinding?>(
+                inflater,
+                R.layout.fragment_request_info,
+                container,
+                false
+            ).apply {
+                // Устанавливаем lifecycleOwner, чтобы binding мог прослушивать LiveData
+                lifecycleOwner = viewLifecycleOwner
+                viewModel = itemViewModel
+            }
 
-        viewModel.getRequest(requestId).observe(viewLifecycleOwner) { requestItem ->
-            b.infoMessage.text = requestItem.description
-            b.infoProblemType.text = requestItem.problemType
-            b.infoStatus.text = if (requestItem.isDone) "Done" else "In progress"
-        }
+        return binding.root
     }
 }

@@ -35,4 +35,11 @@
     <string name="password_hint">Пароль</string>
     <string name="email_hint">E-mail</string>
     <string name="or_ru">или</string>
+    <string name="status_done">done</string>
+    <string name="status_in_progress">in progress</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="address_profile">Address</string>
+    <string name="phone">Phone</string>
+    <string name="save">Save</string>
 </resources>
