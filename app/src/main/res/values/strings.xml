@@ -42,4 +42,5 @@
     <string name="address_profile">Address</string>
     <string name="phone">Phone</string>
     <string name="save">Save</string>
+    <string name="refresh_requests">Refresh requests</string>
 </resources>

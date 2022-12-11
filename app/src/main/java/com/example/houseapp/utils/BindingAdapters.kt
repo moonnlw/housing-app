@@ -1,9 +1,9 @@
 package com.example.houseapp.utils
 
+import android.view.View
 import androidx.databinding.BindingAdapter
-import com.google.android.material.card.MaterialCardView
 
 @BindingAdapter("android:visibility")
-fun MaterialCardView.bindVisibility(value: Boolean) {
-    visibility = if (value) MaterialCardView.VISIBLE else MaterialCardView.GONE
+fun View.bindVisibility(value: Boolean) {
+    visibility = if (value) View.VISIBLE else View.GONE
 }

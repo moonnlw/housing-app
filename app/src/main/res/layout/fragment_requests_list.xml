@@ -12,30 +12,39 @@
             type="com.example.houseapp.listscreen.RequestsViewModel" />
     </data>
 
+    <!--<com.google.android.material.appbar.AppBarLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.appbar.AppBarLayout>-->
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!--TODO связь progressBar с viewModel-->
-        <!--<com.google.android.material.progressindicator.CircularProgressIndicator
+        <com.google.android.material.progressindicator.CircularProgressIndicator
             android:id="@+id/loading_spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:indeterminate="true"
-            app:trackCornerRadius="2dp" />-->
+            android:visibility="@{viewModel.isLoading}"
+            app:trackCornerRadius="2dp" />
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:refreshing="@{viewModel.isLoading()}"
-            app:onRefreshListener="@{() -> viewModel.refreshRequests()}">
+            app:onRefreshListener="@{() -> viewModel.refreshRequests()}"
+            app:refreshing="@{viewModel.isLoading}">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/requests_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:visibility="@{!viewModel.isLoading}"
                 tools:listitem="@layout/list_view_item" />
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </FrameLayout>

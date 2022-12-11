@@ -69,7 +69,6 @@ class MainActivity : AppCompatActivity() {
                     else -> View.VISIBLE
                 }
         }
-
         window.statusBarColor = Color.TRANSPARENT
     }
 
