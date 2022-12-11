@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.houseapp.data.RequestsRepository
 import com.example.houseapp.data.UserRequest
 import kotlinx.coroutines.*
+import java.sql.SQLException
 
 class RequestsViewModel(private val requestsRepository: RequestsRepository) : ViewModel() {
 
@@ -29,9 +30,14 @@ class RequestsViewModel(private val requestsRepository: RequestsRepository) : Vi
     // TODO check for admin
     fun refreshRequests() {
         _isLoading.value = true
+
         viewModelScope.launch(Dispatchers.Default) {
-            requestsRepository.refreshUserRequests(userId)
-            _isLoading.postValue(false)
+            try {
+                requestsRepository.refreshUserRequests(userId)
+            } catch (_: SQLException) {
+            } finally {
+                _isLoading.postValue(false)
+            }
         }
     }
 }

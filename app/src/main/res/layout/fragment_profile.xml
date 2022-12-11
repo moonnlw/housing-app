@@ -5,7 +5,6 @@
     tools:context="com.example.houseapp.homescreen.ProfileView">
 
     <data>
-
         <variable
             name="user"
             type="com.example.houseapp.data.User" />

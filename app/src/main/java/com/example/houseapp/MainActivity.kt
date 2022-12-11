@@ -1,6 +1,5 @@
 package com.example.houseapp
 
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.content.Intent
 import android.os.Bundle
@@ -20,6 +19,7 @@ import com.example.houseapp.loginscreen.LoginActivity
 import com.example.houseapp.utils.NetworkConnection
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -57,6 +57,8 @@ class MainActivity : AppCompatActivity() {
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_nav)
         bottomNavigationView.setupWithNavController(navController)
 
+        setSupportActionBar(toolbar)
+
         appBarConfiguration = AppBarConfiguration(
             setOf(R.id.profileScreen, R.id.requestsList, R.id.createRequest)
         )
@@ -69,7 +71,6 @@ class MainActivity : AppCompatActivity() {
                     else -> View.VISIBLE
                 }
         }
-        window.statusBarColor = Color.TRANSPARENT
     }
 
     private fun authorize() {
