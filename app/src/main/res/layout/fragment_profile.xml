@@ -5,6 +5,7 @@
     tools:context="com.example.houseapp.homescreen.ProfileView">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.example.houseapp.homescreen.UserViewmodel" />
@@ -37,6 +38,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/first_name"
+                    android:lines="1"
+                    android:maxLength="20"
+                    android:maxLines="1"
+                    android:singleLine="true"
                     android:text="@{viewModel.user.firstName}" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -49,6 +54,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/last_name"
+                    android:lines="1"
+                    android:maxLength="20"
+                    android:maxLines="1"
+                    android:singleLine="true"
                     android:text="@{viewModel.user.lastName}" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -63,6 +72,10 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/address_profile"
                     android:inputType="textPostalAddress"
+                    android:lines="1"
+                    android:maxLength="20"
+                    android:maxLines="1"
+                    android:singleLine="true"
                     android:text="@{viewModel.user.address}" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -77,6 +90,10 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/phone"
                     android:inputType="phone"
+                    android:lines="1"
+                    android:maxLength="20"
+                    android:maxLines="1"
+                    android:singleLine="true"
                     android:text="@{viewModel.user.phone}" />
             </com.google.android.material.textfield.TextInputLayout>
 
