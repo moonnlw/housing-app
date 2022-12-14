@@ -25,7 +25,8 @@
     <string name="info_message_sample_ru">Когда человек сознательно или интуитивно выбирает себе в жизни какую-то цель, жизненную задачу, он невольно дает себе оценку. По тому, ради чего человек живет, можно судить и о его самооценке - низкой или высокой. Если человек живет, чтобы приносить людям добро, облегчать их страдания, давать людям радость, то он оценивает себя на уровне этой своей человечности. Он ставит себе цель, достойную человека.</string>
     <string name="info_message_sample_ru2">ААаааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааааа</string>
     <string name="problemType_sample">plumbing</string>
-    <string name="status_sample">completed</string>
+    <string name="status_completed">Completed</string>
+    <string name="status_declined">Declined</string>
     <string name="send_request">Send request</string>
     <string name="your_name">Your name:</string>
     <string name="info_message_sample_ru3">Тут мало текста, очень мало текста</string>
@@ -43,4 +44,8 @@
     <string name="phone">Phone</string>
     <string name="save">Save</string>
     <string name="refresh_requests">Refresh requests</string>
+    <string name="your_reply_text">Your reply text</string>
+    <string name="decline">Decline</string>
+    <string name="accept">Accept</string>
+    <string name="status_in_progress_info">In progress</string>
 </resources>

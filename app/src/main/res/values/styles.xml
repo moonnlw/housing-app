@@ -10,9 +10,8 @@
         <item name="android:textColor">@color/material_on_background_emphasis_medium</item>
     </style>
 
-    <style name="RequestInfo" parent="">
+    <style name="RequestInfo" parent="TextAppearance.Material3.BodyMedium">
         <item name="android:textSize">16sp</item>
-        <item name="android:hyphenationFrequency">full</item>
     </style>
 
     <style name="RequestInfo.Headers" parent="RequestInfo">
@@ -25,11 +24,11 @@
         <item name="android:textColor">@color/material_on_background_emphasis_high_type</item>
         <item name="android:textSize">10sp</item>
     </style>
-
+3
     <style name="Widget.HouseApp.CardView" parent="Widget.Material3.CardView.Elevated">
         <item name="materialThemeOverlay">@style/ThemeOverlay.HouseApp.Card</item>
         <item name="shapeAppearance">@style/ShapeAppearance.HouseApp.MediumComponent</item>
-        <item name="cardElevation">3dp</item>
+        <item name="cardElevation">1dp</item>
     </style>
 
     <style name="ShapeAppearance.HouseApp.MediumComponent" parent="ShapeAppearance.Material3.MediumComponent">
