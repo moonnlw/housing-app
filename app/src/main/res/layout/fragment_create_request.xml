@@ -7,7 +7,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="12dp"
+        android:paddingHorizontal="6dp"
+        android:paddingTop="10dp"
         tools:context="com.example.houseapp.newrequestscreen.CreateRequestView">
 
         <com.google.android.material.card.MaterialCardView
@@ -15,13 +16,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            android:layout_marginBottom="12dp">
+            android:layout_marginBottom="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="12dp"
+                android:layout_marginBottom="4dp"
                 android:orientation="vertical">
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -49,13 +51,14 @@
             style="@style/Widget.HouseApp.CardView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="7dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="12dp"
+                android:layout_marginBottom="4dp"
                 android:orientation="horizontal">
 
                 <com.google.android.material.textfield.TextInputLayout

@@ -120,7 +120,7 @@ class SpaceItemDecorator : RecyclerView.ItemDecoration() {
         parent: RecyclerView,
         state: RecyclerView.State
     ) {
-        val margin = 12
+        val margin = 10
         val space = TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_DIP,
             margin.toFloat(),

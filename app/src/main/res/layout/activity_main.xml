@@ -40,7 +40,7 @@
             android:elevation="3dp"
             android:fitsSystemWindows="true"
             app:itemRippleColor="@null"
-            app:labelVisibilityMode="labeled"
+            app:labelVisibilityMode="selected"
             app:menu="@menu/bottom_nav_menu" />
     </LinearLayout>
 

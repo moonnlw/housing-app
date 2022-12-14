@@ -19,8 +19,8 @@
         style="@style/Widget.HouseApp.CardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="12dp"
-        android:layout_marginBottom="12dp"
+        android:layout_marginHorizontal="6dp"
+        android:layout_marginBottom="10dp"
         android:onClick="@{() -> requestCallback.onClick(request)}">
 
         <LinearLayout
@@ -49,8 +49,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="end"
-                    android:text="@{request.isDone ? @string/status_done : @string/status_in_progress }" />
-
+                    android:text="@{request.isDone ? (request.solution ? @string/status_completed : @string/status_declined) : @string/status_in_progress_info }" />
             </LinearLayout>
 
             <LinearLayout
