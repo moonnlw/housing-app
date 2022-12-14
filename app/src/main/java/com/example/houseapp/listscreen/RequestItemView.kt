@@ -14,6 +14,8 @@ import com.example.houseapp.R
 import com.example.houseapp.databinding.FragmentRequestInfoBinding
 import com.example.houseapp.homescreen.UserViewmodel
 import com.example.houseapp.listscreen.RequestAdapter.Companion.REQUEST_KEY
+import kotlinx.android.synthetic.main.fragment_request_info.*
+
 /**
  * Фрагмент отображает выбранную заявку из списка заявок
  */
@@ -69,6 +71,14 @@ class RequestItemView : Fragment() {
             } else {
                 itemViewModel.updateRequest(answer, false)
             }
+        }
+
+        binding.answerInputField.setOnFocusChangeListener { _, hasFocus ->
+            answerInputLayout.hint =
+                if (hasFocus) ""
+                else
+                    if (answerInputField.text.isNullOrEmpty()) getString(R.string.your_reply_text)
+                    else ""
         }
 
         return binding.root

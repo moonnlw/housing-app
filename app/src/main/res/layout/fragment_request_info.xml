@@ -29,14 +29,14 @@
                 style="@style/Widget.HouseApp.CardView"
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
-                android:layout_margin="12dp">
+                android:layout_marginHorizontal="6dp"
+                android:layout_marginVertical="10dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginVertical="8.5dp"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginEnd="10dp"
+                    android:layout_marginHorizontal="16dp"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -96,8 +96,7 @@
 
                         <com.google.android.material.textview.MaterialTextView
                             android:id="@+id/info_from"
-                            style="@style/RequestInfo"
-
+                            style="@style/RequestInfo.Headers"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@{userVM.user.firstName}" />
@@ -133,13 +132,13 @@
                 style="@style/Widget.HouseApp.CardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="12dp"
-                android:layout_marginBottom="12dp">
+                android:layout_marginHorizontal="6dp"
+                android:layout_marginBottom="10dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginHorizontal="10dp"
                     android:layout_marginTop="11dp"
                     android:orientation="vertical">
 
@@ -166,7 +165,6 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/info_message_word"
                         android:layout_marginHorizontal="8dp"
-                        android:lineSpacingMultiplier="2"
                         android:text="@{itemVM.request.description}" />
 
                     <com.google.android.material.textview.MaterialTextView
@@ -187,14 +185,14 @@
                 style="@style/Widget.HouseApp.CardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="12dp"
-                android:layout_marginBottom="12dp"
+                android:layout_marginHorizontal="6dp"
+                android:layout_marginBottom="10dp"
                 android:visibility="@{itemVM.request.done}">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
+                    android:layout_marginHorizontal="10dp"
                     android:layout_marginTop="11dp"
                     android:orientation="vertical">
 
@@ -221,7 +219,6 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/info_answer_word"
                         android:layout_marginHorizontal="8dp"
-                        android:lineSpacingMultiplier="2"
                         android:text="@{itemVM.request.answer}" />
 
                     <com.google.android.material.textview.MaterialTextView
@@ -249,7 +246,7 @@
                     style="@style/Widget.HouseApp.CardView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginHorizontal="6dp"
                     android:layout_marginBottom="8dp">
 
                     <RelativeLayout
@@ -276,28 +273,27 @@
                             android:textAlignment="gravity" />
 
                         <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/answerInputLayout"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_alignParentTop="true"
                             android:layout_marginHorizontal="2dp"
                             android:hint="@string/your_reply_text"
-                            android:paddingTop="4dp"
+                            android:paddingTop="6dp"
+                            android:textAppearance="@style/RequestInfo"
 
                             app:boxBackgroundMode="none"
-                            app:hintAnimationEnabled="false"
-                            app:hintTextAppearance="@style/RequestTextStyle.Content"
-                            app:hintTextColor="@drawable/selector_hint">
+                            app:hintAnimationEnabled="false">
 
                             <com.google.android.material.textfield.TextInputEditText
                                 android:id="@+id/answerInputField"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:gravity="center|start"
+                                android:gravity="bottom|start"
+                                android:lineSpacingMultiplier="1.05"
 
-                                android:lineSpacingMultiplier="1.1"
                                 android:maxLength="300"
-                                android:textAppearance="@style/RequestInfo"
-                                app:helperTextEnabled="true" />
+                                android:textAppearance="@style/RequestInfo" />
                         </com.google.android.material.textfield.TextInputLayout>
 
                     </RelativeLayout>
@@ -307,14 +303,14 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingStart="12dp"
+                    android:paddingStart="6dp"
                     tools:ignore="RtlSymmetry">
 
                     <com.google.android.material.progressindicator.LinearProgressIndicator
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:indeterminate="true"
-                        android:paddingEnd="12dp"
+                        android:paddingEnd="6dp"
                         android:visibility="@{itemVM.isLoading}" />
 
                     <Button
@@ -325,7 +321,7 @@
                         android:layout_alignParentEnd="true"
                         android:layout_gravity="end"
                         android:layout_marginTop="7.5dp"
-                        android:layout_marginEnd="12dp"
+                        android:layout_marginEnd="6dp"
                         android:text="@string/accept"
                         app:icon="@drawable/ic_approve" />
 
