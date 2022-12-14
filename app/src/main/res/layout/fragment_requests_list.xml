@@ -12,15 +12,6 @@
             type="com.example.houseapp.listscreen.RequestsViewModel" />
     </data>
 
-    <!--<com.google.android.material.appbar.AppBarLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
-        <com.google.android.material.appbar.MaterialToolbar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-    </com.google.android.material.appbar.AppBarLayout>-->
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
