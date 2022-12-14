@@ -8,16 +8,22 @@ class UserRequest(
     val problemType: String,
     val description: String,
     val isDone: Boolean = false,
+    var answer: String? = null,
+    var solution: Boolean? = null
 )
 
 fun List<UserRequest>.asDatabaseModel(): List<DatabaseRequest> {
-    return map {
-        DatabaseRequest(
-            requestId = it.requestId!!,
-            userId = it.userId,
-            problemType = it.problemType,
-            description = it.description,
-            isDone = it.isDone
-        )
-    }
+    return map { it.asDatabaseModel() }
+}
+
+fun UserRequest.asDatabaseModel(): DatabaseRequest {
+    return DatabaseRequest(
+        requestId = requestId!!,
+        userId = userId,
+        problemType = problemType,
+        description = description,
+        isDone = isDone,
+        answer = answer,
+        solution = solution
+    )
 }

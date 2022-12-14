@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -12,7 +13,6 @@ import com.example.houseapp.MyApplication
 import com.example.houseapp.R
 import com.example.houseapp.databinding.FragmentRequestInfoBinding
 import com.example.houseapp.listscreen.RequestAdapter.Companion.REQUEST_KEY
-
 /**
  * Фрагмент отображает выбранную заявку из списка заявок
  */
@@ -41,6 +41,33 @@ class RequestItemView : Fragment() {
                 lifecycleOwner = viewLifecycleOwner
                 viewModel = itemViewModel
             }
+
+        binding.acceptButton.setOnClickListener {
+            val answer = binding.answerInputField.text.toString()
+            if (answer.isEmpty()) {
+                Toast.makeText(
+                    activity,
+                    "Please fill the answer field before accepting",
+                    Toast.LENGTH_LONG
+                ).show()
+            } else {
+                itemViewModel.updateRequest(answer, true)
+            }
+        }
+
+        binding.declineButton.setOnClickListener {
+
+            val answer = binding.answerInputField.text.toString()
+            if (answer.isEmpty()) {
+                Toast.makeText(
+                    activity,
+                    "Please fill the answer field before declining",
+                    Toast.LENGTH_LONG
+                ).show()
+            } else {
+                itemViewModel.updateRequest(answer, false)
+            }
+        }
 
         return binding.root
     }

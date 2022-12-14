@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 
-@Database(entities = [DatabaseRequest::class], version = 1)
+@Database(entities = [DatabaseRequest::class], version = 2)
 abstract class LocalDatabase : RoomDatabase() {
 
     abstract val requestDaoLocal: RequestDaoLocal

@@ -28,13 +28,19 @@ class RequestsRepository private constructor(
             it.asDomainModel()
         }
 
-    fun getRequest(id: Int): UserRequest =
-        database.requestDaoLocal.getRequest(id).asDomainModel()
+    fun getRequest(id: Int): LiveData<UserRequest> =
+        Transformations.map(database.requestDaoLocal.getRequest(id)) { it.asDomainModel() }
 
     suspend fun refreshUserRequests(id: String) {
         if (NetworkConnection.isNetworkAvailable) {
             val newRequests = requestDao.getRequestsByUserID(id)
             database.requestDaoLocal.insertAll(newRequests.asDatabaseModel())
+        }
+    }
+
+    fun updateRequest(answer: String, solution: Boolean, requestId: Int) {
+        if (NetworkConnection.isNetworkAvailable) {
+            database.requestDaoLocal.update(answer, solution, requestId)
         }
     }
 }
