@@ -12,6 +12,7 @@ import com.example.houseapp.AppContainer
 import com.example.houseapp.MyApplication
 import com.example.houseapp.R
 import com.example.houseapp.databinding.FragmentRequestInfoBinding
+import com.example.houseapp.homescreen.UserViewmodel
 import com.example.houseapp.listscreen.RequestAdapter.Companion.REQUEST_KEY
 /**
  * Фрагмент отображает выбранную заявку из списка заявок
@@ -21,6 +22,7 @@ class RequestItemView : Fragment() {
     private lateinit var binding: FragmentRequestInfoBinding
     private lateinit var appContainer: AppContainer
     private val itemViewModel: RequestItemViewModel by activityViewModels { appContainer.requestsViewModelFactory }
+    private val userViewModel: UserViewmodel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,7 +41,8 @@ class RequestItemView : Fragment() {
             ).apply {
                 // Устанавливаем lifecycleOwner, чтобы binding мог прослушивать LiveData
                 lifecycleOwner = viewLifecycleOwner
-                viewModel = itemViewModel
+                itemVM = itemViewModel
+                userVM = userViewModel
             }
 
         binding.acceptButton.setOnClickListener {
@@ -56,7 +59,6 @@ class RequestItemView : Fragment() {
         }
 
         binding.declineButton.setOnClickListener {
-
             val answer = binding.answerInputField.text.toString()
             if (answer.isEmpty()) {
                 Toast.makeText(
