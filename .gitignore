@@ -221,3 +221,6 @@ fabric.properties
 !/gradle/wrapper/gradle-wrapper.jar
 
 # End of https://www.toptal.com/developers/gitignore/api/java,androidstudio,android,kotlin,gradle
+
+#Database credentials
+app/src/main/java/com/example/houseapp/utils/DatabaseConfig.kt
