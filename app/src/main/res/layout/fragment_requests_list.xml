@@ -3,13 +3,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.houseapp.listscreen.RequestsListView">
+    tools:context="com.houseapp.listscreen.RequestsListView">
 
     <data>
 
         <variable
             name="viewModel"
-            type="com.example.houseapp.listscreen.RequestsViewModel" />
+            type="com.houseapp.listscreen.RequestsViewModel" />
     </data>
 
     <FrameLayout

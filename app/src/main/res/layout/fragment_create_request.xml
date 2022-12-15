@@ -8,7 +8,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="12dp"
-        tools:context="com.example.houseapp.newrequestscreen.CreateRequestView">
+        tools:context="com.houseapp.newrequestscreen.CreateRequestView">
 
         <com.google.android.material.card.MaterialCardView
             style="@style/Widget.HouseApp.CardView"

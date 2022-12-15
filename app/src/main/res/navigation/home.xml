@@ -9,7 +9,7 @@
 
     <fragment
         android:id="@+id/profileScreen"
-        android:name="com.example.houseapp.homescreen.ProfileView"
+        android:name="com.houseapp.homescreen.ProfileView"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_profile">
     </fragment>

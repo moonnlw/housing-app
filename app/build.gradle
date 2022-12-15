@@ -8,11 +8,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.houseapp'
+    namespace 'com.houseapp'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.houseapp"
+        applicationId "com.houseapp"
         minSdk 23
         targetSdk 33
         versionCode 1

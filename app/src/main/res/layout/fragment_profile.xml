@@ -2,12 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.houseapp.homescreen.ProfileView">
+    tools:context="com.houseapp.homescreen.ProfileView">
 
     <data>
         <variable
             name="user"
-            type="com.example.houseapp.data.User" />
+            type="com.houseapp.data.User" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

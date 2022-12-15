@@ -9,7 +9,7 @@
 
     <fragment
             android:id="@+id/requestsList"
-            android:name="com.example.houseapp.listscreen.RequestsListView"
+            android:name="com.houseapp.listscreen.RequestsListView"
             android:label="@string/title_list"
             tools:layout="@layout/fragment_requests_list">
         <action
@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/request"
-        android:name="com.example.houseapp.listscreen.RequestItemView"
+        android:name="com.houseapp.listscreen.RequestItemView"
         android:label="Request"
         tools:layout="@layout/fragment_request_info">
     </fragment>
