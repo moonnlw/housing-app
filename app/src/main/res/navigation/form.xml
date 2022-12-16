@@ -9,7 +9,7 @@
 
     <fragment
             android:id="@+id/createRequest"
-            android:name="com.example.houseapp.newrequestscreen.CreateRequestView"
+            android:name="com.example.houseapp.ui.newrequestscreen.CreateRequestView"
             android:label="New request"
             tools:layout="@layout/fragment_create_request">
         <action
@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/sent"
-        android:name="com.example.houseapp.newrequestscreen.SentView"
+        android:name="com.example.houseapp.ui.newrequestscreen.SentView"
         android:label="Sent"
         tools:layout="@layout/fragment_request_sent"/>
 

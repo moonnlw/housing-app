@@ -9,7 +9,7 @@
         android:orientation="vertical"
         android:paddingHorizontal="6dp"
         android:paddingTop="10dp"
-        tools:context="com.example.houseapp.newrequestscreen.CreateRequestView">
+        tools:context="com.example.houseapp.ui.newrequestscreen.CreateRequestView">
 
         <com.google.android.material.card.MaterialCardView
             style="@style/Widget.HouseApp.CardView"

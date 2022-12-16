@@ -7,11 +7,11 @@
 
         <variable
             name="request"
-            type="com.example.houseapp.data.UserRequest" />
+            type="com.example.houseapp.data.models.UserRequest" />
 
         <variable
             name="requestCallback"
-            type="com.example.houseapp.listscreen.RequestClickListener" />
+            type="com.example.houseapp.ui.listscreen.RequestClickListener" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

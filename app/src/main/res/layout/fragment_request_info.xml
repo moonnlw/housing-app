@@ -7,11 +7,11 @@
 
         <variable
             name="userVM"
-            type="com.example.houseapp.homescreen.UserViewmodel" />
+            type="com.example.houseapp.ui.homescreen.UserViewModel" />
 
         <variable
             name="itemVM"
-            type="com.example.houseapp.listscreen.RequestItemViewModel" />
+            type="com.example.houseapp.ui.listscreen.RequestItemViewModel" />
     </data>
 
     <ScrollView
@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            tools:context="com.example.houseapp.listscreen.RequestItemView">
+            tools:context="com.example.houseapp.ui.listscreen.RequestItemView">
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/info_card"
