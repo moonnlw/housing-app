@@ -3,13 +3,13 @@ package com.example.houseapp.data
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.example.houseapp.data.local.LocalDatabase
-import com.example.houseapp.data.local.asDomainModel
-import com.example.houseapp.data.remote.RequestDao
+import com.example.houseapp.data.models.UserRequest
+import com.example.houseapp.data.remote.RequestDaoRemote
 import com.example.houseapp.utils.NetworkConnection
 
 
 class RequestsRepository private constructor(
-    private val requestDao: RequestDao,
+    private val requestDaoRemote: RequestDaoRemote,
     private val database: LocalDatabase
 ) {
 
@@ -17,9 +17,9 @@ class RequestsRepository private constructor(
         @Volatile
         private var instance: RequestsRepository? = null
 
-        fun getInstance(requestDao: RequestDao, database: LocalDatabase) =
+        fun getInstance(requestDaoRemote: RequestDaoRemote, database: LocalDatabase) =
             instance ?: synchronized(this) {
-                instance ?: RequestsRepository(requestDao, database).also { instance = it }
+                instance ?: RequestsRepository(requestDaoRemote, database).also { instance = it }
             }
     }
 
@@ -33,7 +33,7 @@ class RequestsRepository private constructor(
 
     suspend fun refreshUserRequests(id: String) {
         if (NetworkConnection.isNetworkAvailable) {
-            val newRequests = requestDao.getRequestsByUserID(id)
+            val newRequests = requestDaoRemote.getRequestsByUserID(id)
             database.requestDaoLocal.insertAll(newRequests.asDatabaseModel())
         }
     }

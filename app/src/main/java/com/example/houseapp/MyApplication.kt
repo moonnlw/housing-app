@@ -2,6 +2,7 @@ package com.example.houseapp
 
 import android.app.Application
 import android.content.Context
+import com.example.houseapp.utils.AppContainer
 
 class MyApplication: Application() {
 

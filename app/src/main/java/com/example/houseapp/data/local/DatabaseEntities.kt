@@ -3,7 +3,6 @@ package com.example.houseapp.data.local
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.houseapp.data.UserRequest
 
 @Entity
 data class DatabaseRequest constructor(
@@ -16,19 +15,11 @@ data class DatabaseRequest constructor(
     @ColumnInfo(name = "solution") val solution: Boolean?
 )
 
-
-fun List<DatabaseRequest>.asDomainModel(): List<UserRequest> {
-    return map { it.asDomainModel() }
-}
-
-fun DatabaseRequest.asDomainModel(): UserRequest {
-    return UserRequest(
-        requestId = requestId,
-        userId = userId,
-        problemType = problemType,
-        description = description,
-        isDone = isDone,
-        answer = answer,
-        solution = solution
-    )
-}
+@Entity
+data class DatabaseUser constructor(
+    @PrimaryKey @ColumnInfo(name = "user_id") val userId: String,
+    @ColumnInfo(name = "first_name") val firstName: String,
+    @ColumnInfo(name = "last_name") val lastName: String,
+    @ColumnInfo(name = "address") val address: String,
+    @ColumnInfo(name = "phone_number") val phoneNumber: String
+)

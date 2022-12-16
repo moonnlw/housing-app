@@ -6,10 +6,11 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 
-@Database(entities = [DatabaseRequest::class], version = 2)
+@Database(entities = [DatabaseRequest::class, DatabaseUser::class], version = 3)
 abstract class LocalDatabase : RoomDatabase() {
 
     abstract val requestDaoLocal: RequestDaoLocal
+    abstract val userDaoLocal: UserDaoLocal
 
     companion object {
         @Volatile
