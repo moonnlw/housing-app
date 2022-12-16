@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
-import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -41,20 +40,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        try {
-            appContainer = (application as MyApplication).appContainer
-            authorize()
-            initializeUI()
-            connectToDatabase()
-        } catch (ex: Exception) {
-            Log.e(javaClass.simpleName, ex.message.toString())
-        }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        requestsViewModel.userId = currentUserId
-        userViewModel.userId = currentUserId
+        appContainer = (application as MyApplication).appContainer
+        authorize()
+        initializeUI()
+        connectToDatabase()
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -114,6 +103,8 @@ class MainActivity : AppCompatActivity() {
         } else {
             currentUserId = auth.currentUser!!.uid
         }
+        requestsViewModel.userId = currentUserId
+        userViewModel.userId = currentUserId
     }
 
     private fun connectToDatabase() {

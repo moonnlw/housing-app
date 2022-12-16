@@ -47,3 +47,13 @@ fun UserRequest.asDatabaseModel(): DatabaseRequest {
         solution = solution
     )
 }
+
+fun User.asDatabaseModel(): DatabaseUser {
+    return DatabaseUser(
+        userId = userId,
+        firstName = firstName!!,
+        lastName = lastName!!,
+        address = address!!,
+        phoneNumber = phone!!
+    )
+}

@@ -14,17 +14,31 @@ class UserViewModel(private val userRepository: UserRepository) : ViewModel() {
     var userId: String = ""
         set(value) {
             field = value
-            get(value)
+            refreshUser(value)
         }
 
     val user: LiveData<User?>
         get() = _user
 
-    private val _user = MutableLiveData<User?>()
+    private var _user = MutableLiveData<User>(null)
 
-    private fun get(userId: String) {
+    val isLoading: LiveData<Boolean>
+        get() = _isLoading
+
+    private val _isLoading = MutableLiveData(false)
+
+    private fun refreshUser(id: String) {
+        _isLoading.value = true
         viewModelScope.launch(Dispatchers.Default) {
-            _user.value = userRepository.getUser(userId)
+            _user = userRepository.getUser(userId) as MutableLiveData<User>
+            userRepository.refreshUser(id)
+            _isLoading.postValue(false)
+        }
+    }
+
+    fun update(user: User) {
+        viewModelScope.launch(Dispatchers.Default) {
+            userRepository.update(user)
         }
     }
 }

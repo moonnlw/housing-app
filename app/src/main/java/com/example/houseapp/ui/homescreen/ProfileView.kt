@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.example.houseapp.utils.AppContainer
 import com.example.houseapp.MyApplication
 import com.example.houseapp.R
+import com.example.houseapp.data.models.User
 import com.example.houseapp.databinding.FragmentProfileBinding
 
 /**
@@ -41,10 +43,11 @@ class ProfileView : Fragment() {
             val lastName = binding.lastnameField.text.toString()
             val address = binding.addressField.text.toString()
             val phone = binding.phoneField.text.toString()
-        /*    val user = User(firstName, lastName, address, phone)
-            userViewModel.saveUser(user)
+
+            val user = User(userViewModel.userId, firstName, lastName, address, phone)
+            userViewModel.update(user)
             Toast.makeText(activity, "Successfully saved", Toast.LENGTH_LONG).show()
-        */}
+        }
 
         return binding.root
     }

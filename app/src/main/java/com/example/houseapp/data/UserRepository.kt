@@ -1,6 +1,9 @@
 package com.example.houseapp.data
 
 
+import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
 import com.example.houseapp.data.local.LocalDatabase
 import com.example.houseapp.data.models.User
 import com.example.houseapp.data.remote.UserDaoRemote
@@ -20,9 +23,19 @@ class UserRepository private constructor(
             }
     }
 
-    suspend fun getUser(id: String): User =
-        when (database.userDaoLocal.count()) {
-            0 -> userDaoRemote.getUserByID(id)
-            else -> database.userDaoLocal.getUser(id).asDomainModel()
+    fun getUser(id: String): LiveData<User> =
+        Transformations.map(database.userDaoLocal.getUser(id)) { it?.asDomainModel() }
+
+    suspend fun refreshUser(id: String) {
+        if (database.userDaoLocal.count() == 0) {
+            Log.e(javaClass.simpleName, "room is empty")
+            val newUser = userDaoRemote.getUserByID(id)
+            database.userDaoLocal.insert(newUser.asDatabaseModel())
         }
+    }
+
+    suspend fun update(user: User) {
+        userDaoRemote.update(user)
+        database.userDaoLocal.insert(user.asDatabaseModel())
+    }
 }
