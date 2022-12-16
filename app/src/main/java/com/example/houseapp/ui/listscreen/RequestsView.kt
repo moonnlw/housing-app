@@ -1,4 +1,4 @@
-package com.example.houseapp.listscreen
+package com.example.houseapp.ui.listscreen
 
 import android.annotation.SuppressLint
 import android.graphics.Rect
@@ -15,13 +15,13 @@ import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.houseapp.AppContainer
+import com.example.houseapp.utils.AppContainer
 import com.example.houseapp.MyApplication
 import com.example.houseapp.R
-import com.example.houseapp.data.UserRequest
+import com.example.houseapp.data.models.UserRequest
 import com.example.houseapp.databinding.FragmentRequestsListBinding
 import com.example.houseapp.databinding.ListViewItemBinding
-import com.example.houseapp.listscreen.RequestAdapter.Companion.REQUEST_KEY
+import com.example.houseapp.ui.listscreen.RequestAdapter.Companion.REQUEST_KEY
 
 /**
  * Показывает список запросов пользователя

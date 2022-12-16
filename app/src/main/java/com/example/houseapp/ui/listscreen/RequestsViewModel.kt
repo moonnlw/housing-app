@@ -1,11 +1,11 @@
-package com.example.houseapp.listscreen
+package com.example.houseapp.ui.listscreen
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.houseapp.data.RequestsRepository
-import com.example.houseapp.data.UserRequest
+import com.example.houseapp.data.models.UserRequest
 import kotlinx.coroutines.*
 import java.sql.SQLException
 

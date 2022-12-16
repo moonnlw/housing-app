@@ -1,10 +1,10 @@
-package com.example.houseapp
+package com.example.houseapp.utils
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.houseapp.data.RequestsRepository
-import com.example.houseapp.listscreen.RequestItemViewModel
-import com.example.houseapp.listscreen.RequestsViewModel
+import com.example.houseapp.ui.listscreen.RequestItemViewModel
+import com.example.houseapp.ui.listscreen.RequestsViewModel
 
 class RequestsViewModelFactory(private val requestsRepository: RequestsRepository) :
     ViewModelProvider.Factory {

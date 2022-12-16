@@ -1,9 +1,9 @@
-package com.example.houseapp.listscreen
+package com.example.houseapp.ui.listscreen
 
 import android.util.Log
 import androidx.lifecycle.*
 import com.example.houseapp.data.RequestsRepository
-import com.example.houseapp.data.UserRequest
+import com.example.houseapp.data.models.UserRequest
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.sql.SQLException

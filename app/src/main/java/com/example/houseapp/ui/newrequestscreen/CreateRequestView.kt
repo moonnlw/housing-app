@@ -1,4 +1,4 @@
-package com.example.houseapp.newrequestscreen
+package com.example.houseapp.ui.newrequestscreen
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,12 +9,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.example.houseapp.AppContainer
+import com.example.houseapp.utils.AppContainer
 import com.example.houseapp.MyApplication
 import com.example.houseapp.R
 import com.example.houseapp.data.remote.UserRequests
 import com.example.houseapp.databinding.FragmentCreateRequestBinding
-import com.example.houseapp.listscreen.RequestsViewModel
+import com.example.houseapp.ui.listscreen.RequestsViewModel
 import org.jetbrains.exposed.sql.addLogger
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.transactions.transaction

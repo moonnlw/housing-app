@@ -1,4 +1,4 @@
-package com.example.houseapp.loginscreen
+package com.example.houseapp.ui.loginscreen
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -8,9 +8,8 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import com.example.houseapp.MainActivity
 import com.example.houseapp.R
-import com.example.houseapp.Roles
+import com.example.houseapp.data.remote.Users
 import com.example.houseapp.databinding.ActivitySignupBinding
-import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.transactions.transaction
@@ -57,7 +56,7 @@ class SignupActivity : AppCompatActivity() {
 
     private fun addUserToDatabase() {
         transaction {
-            Roles.insert {
+            Users.insert {
                 it[userId] = auth.currentUser!!.uid
             }
         }

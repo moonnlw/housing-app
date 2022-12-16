@@ -31,7 +31,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".loginscreen.LoginActivity"
+            android:name=".ui.loginscreen.LoginActivity"
             android:exported="true">
 
             <meta-data
@@ -40,7 +40,7 @@
         </activity>
 
         <activity
-            android:name=".loginscreen.SignupActivity"
+            android:name=".ui.loginscreen.SignupActivity"
             android:exported="true">
 
             <meta-data

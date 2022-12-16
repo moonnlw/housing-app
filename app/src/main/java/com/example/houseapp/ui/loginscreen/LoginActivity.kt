@@ -1,4 +1,4 @@
-package com.example.houseapp.loginscreen
+package com.example.houseapp.ui.loginscreen
 
 import android.content.Intent
 import android.os.Bundle

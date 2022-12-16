@@ -1,4 +1,4 @@
-package com.example.houseapp.listscreen
+package com.example.houseapp.ui.listscreen
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,12 +8,12 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.example.houseapp.AppContainer
+import com.example.houseapp.utils.AppContainer
 import com.example.houseapp.MyApplication
 import com.example.houseapp.R
 import com.example.houseapp.databinding.FragmentRequestInfoBinding
-import com.example.houseapp.homescreen.UserViewmodel
-import com.example.houseapp.listscreen.RequestAdapter.Companion.REQUEST_KEY
+import com.example.houseapp.ui.homescreen.UserViewModel
+import com.example.houseapp.ui.listscreen.RequestAdapter.Companion.REQUEST_KEY
 import kotlinx.android.synthetic.main.fragment_request_info.*
 
 /**
@@ -24,7 +24,7 @@ class RequestItemView : Fragment() {
     private lateinit var binding: FragmentRequestInfoBinding
     private lateinit var appContainer: AppContainer
     private val itemViewModel: RequestItemViewModel by activityViewModels { appContainer.requestsViewModelFactory }
-    private val userViewModel: UserViewmodel by activityViewModels()
+    private val userViewModel: UserViewModel by activityViewModels { appContainer.userViewModelFactory }
 
     override fun onCreateView(
         inflater: LayoutInflater,
