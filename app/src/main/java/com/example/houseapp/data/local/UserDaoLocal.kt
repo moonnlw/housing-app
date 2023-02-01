@@ -1,20 +1,23 @@
 package com.example.houseapp.data.local
 
 
-import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface UserDaoLocal {
-    @Query("SELECT * FROM databaseuser WHERE user_id = :id")
-    fun getUser(id: String): LiveData<DatabaseUser>
+    @Query("SELECT * FROM databaseuser WHERE id = :id")
+    fun getUser(id: String?): Flow<DatabaseUser?>
+
+    @Query("SELECT * FROM databaseuser")
+    fun getAllUsers(): Flow<List<DatabaseUser>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(user: DatabaseUser)
+    suspend fun insert(user: DatabaseUser)
+
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun update(user: DatabaseUser)
 
     @Query("SELECT COUNT(*) FROM databaseuser")
-    fun count(): Int
+    suspend fun count(): Int
 }

@@ -1,27 +1,23 @@
 package com.example.houseapp.data.local
 
-import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface RequestDaoLocal {
-    @Query("SELECT * FROM databaserequest")
-    fun getAllRequests(): LiveData<List<DatabaseRequest>>
+
+    @Query("SELECT * FROM databaserequest WHERE user_id = :userId")
+    fun getUserRequests(userId: String?): Flow<List<DatabaseRequest>>
 
     @Query("SELECT * FROM databaserequest WHERE req_id = :id")
-    fun getRequest(id: Int): LiveData<DatabaseRequest>
+    fun getRequest(id: Int): Flow<DatabaseRequest>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(requests: List<DatabaseRequest>)
+    suspend fun insertAll(requests: List<DatabaseRequest>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(requests: DatabaseRequest)
+    suspend fun insert(requests: DatabaseRequest)
 
-    @Query("UPDATE databaserequest " +
-            "SET req_is_done = 1, req_answer =:answer, solution =:solution " +
-            "WHERE req_id =:requestId")
-    fun update(answer: String, solution: Boolean, requestId: Int)
+    @Update(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun update(request: DatabaseRequest)
 }
