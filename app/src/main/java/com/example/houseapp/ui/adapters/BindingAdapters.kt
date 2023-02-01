@@ -1,4 +1,4 @@
-package com.example.houseapp.utils
+package com.example.houseapp.ui.adapters
 
 import android.view.View
 import androidx.databinding.BindingAdapter

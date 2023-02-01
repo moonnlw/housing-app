@@ -1,4 +1,4 @@
-package com.example.houseapp.ui.newrequestscreen
+package com.example.houseapp.ui.user.newrequestscreen
 
 import android.os.Bundle
 import android.view.LayoutInflater
