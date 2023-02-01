@@ -2,26 +2,25 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.houseapp.ui.homescreen.ProfileView">
+    tools:context="com.example.houseapp.ui.user.homescreen.ProfileFragment">
 
     <data>
 
         <variable
             name="viewModel"
-            type="com.example.houseapp.ui.homescreen.UserViewModel" />
+            type="com.example.houseapp.ui.user.homescreen.ProfileViewModel" />
     </data>
 
     <RelativeLayout
-        android:id="@+id/title_linear"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <com.google.android.material.progressindicator.LinearProgressIndicator
             android:id="@+id/loading_line"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@id/save_button"
             android:indeterminate="true"
             android:visibility="@{viewModel.isLoading}"
             app:trackCornerRadius="2dp" />
@@ -30,7 +29,7 @@
             android:id="@+id/profile_linear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/loading_line"
+            android:layout_alignParentTop="true"
             android:orientation="vertical">
 
             <com.google.android.material.card.MaterialCardView
@@ -56,7 +55,7 @@
                         android:maxLength="20"
                         android:maxLines="1"
                         android:singleLine="true"
-                        android:text="@{viewModel.user.firstName}" />
+                        android:text="@={viewModel.user.bFirstName}" />
                 </com.google.android.material.textfield.TextInputLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -64,8 +63,8 @@
                 style="@style/Widget.HouseApp.CardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginHorizontal="6dp">
+                android:layout_marginHorizontal="6dp"
+                android:layout_marginTop="10dp">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
@@ -83,7 +82,7 @@
                         android:maxLength="20"
                         android:maxLines="1"
                         android:singleLine="true"
-                        android:text="@{viewModel.user.lastName}" />
+                        android:text="@={viewModel.user.bLastName}" />
                 </com.google.android.material.textfield.TextInputLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -91,8 +90,8 @@
                 style="@style/Widget.HouseApp.CardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginHorizontal="6dp">
+                android:layout_marginHorizontal="6dp"
+                android:layout_marginTop="10dp">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
@@ -110,7 +109,7 @@
                         android:maxLength="20"
                         android:maxLines="1"
                         android:singleLine="true"
-                        android:text="@{viewModel.user.address}" />
+                        android:text="@={viewModel.user.bAddress}" />
                 </com.google.android.material.textfield.TextInputLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -118,8 +117,8 @@
                 style="@style/Widget.HouseApp.CardView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:layout_marginHorizontal="6dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="6dp">
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -138,7 +137,7 @@
                         android:maxLength="20"
                         android:maxLines="1"
                         android:singleLine="true"
-                        android:text="@{viewModel.user.phone}" />
+                        android:text="@={viewModel.user.bPhone}" />
                 </com.google.android.material.textfield.TextInputLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -152,6 +151,7 @@
             android:layout_below="@id/profile_linear"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="6dp"
+            android:onClick="@{() -> viewModel.saveUserInfo()}"
             android:text="@string/save" />
 
     </RelativeLayout>

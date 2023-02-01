@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/auth"
+    app:startDestination="@id/login">
+
+    <activity
+        android:id="@+id/userActivityDestination"
+        android:name="com.example.houseapp.UserActivity"
+        />
+
+
+    <activity
+        android:id="@+id/adminActivityDestination"
+        android:name="com.example.houseapp.AdminActivity"
+        />
+
+    <fragment
+        android:id="@+id/login"
+        tools:layout="@layout/fragment_login"
+        android:name="com.example.houseapp.ui.user.loginscreen.LoginFragment">
+
+        <action
+            android:id="@+id/navigate_to_signup_fragment"
+            app:destination="@id/signup"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/signup"
+        tools:layout="@layout/fragment_signup"
+        android:name="com.example.houseapp.ui.user.loginscreen.SignupFragment">
+
+        <action
+            android:id="@+id/navigate_to_login_fragment"
+            app:destination="@id/login"/>
+    </fragment>
+</navigation>
