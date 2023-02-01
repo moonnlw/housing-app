@@ -7,7 +7,7 @@ import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 
 class UserDaoRemote {
     private fun resultRowToUser(row: ResultRow) = User(
-        userId = row[Users.userId],
+        id = row[Users.userId],
         firstName = row[Users.firstName],
         lastName = row[Users.lastName],
         address = row[Users.address],
@@ -28,22 +28,28 @@ class UserDaoRemote {
 
     suspend fun addNewUser(user: User): User? = dbQuery {
         val insertStatement = Users.insert {
-            it[userId] = user.userId
-            it[firstName] = user.firstName.toString()
-            it[lastName] = user.lastName.toString()
-            it[address] = user.address.toString()
-            it[phoneNumber] = user.phone.toString()
+            it[userId] = user.id
+            it[firstName] = user.firstName
+            it[lastName] = user.lastName
+            it[address] = user.address
+            it[phoneNumber] = user.phone
         }
 
         insertStatement.resultedValues?.singleOrNull()?.let(::resultRowToUser)
     }
 
     suspend fun update(user: User) = dbQuery {
-        Users.update({Users.userId eq user.userId}) {
-            it[firstName] = user.firstName!!
-            it[lastName] = user.lastName!!
-            it[address] = user.address!!
-            it[phoneNumber] = user.phone!!
+        Users.update({ Users.userId eq user.id }) {
+            it[firstName] = user.firstName
+            it[lastName] = user.lastName
+            it[address] = user.address
+            it[phoneNumber] = user.phone
         }
+    }
+
+    suspend fun getUserIfAdmin(id: String) = dbQuery {
+        Users
+            .select { Users.userId eq id and(Users.isAdmin eq true) }
+            .map(::resultRowToUser)
     }
 }

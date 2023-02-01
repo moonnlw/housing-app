@@ -29,7 +29,6 @@ class RequestDaoRemote {
             it[userId] = userRequest.userId
             it[problemType] = userRequest.problemType
             it[description] = userRequest.description
-            it[isDone] = userRequest.isDone
         }
 
         insertStatement.resultedValues?.singleOrNull()?.let(::resultRowToRequest)
