@@ -9,8 +9,8 @@
 
     <fragment
             android:id="@+id/createRequest"
-            android:name="com.example.houseapp.ui.newrequestscreen.CreateRequestView"
-            android:label="New request"
+            android:name="com.example.houseapp.ui.user.newrequestscreen.CreateRequestFragment"
+            android:label="Create new request"
             tools:layout="@layout/fragment_create_request">
         <action
             android:id="@+id/action_createRequest_to_sent"
@@ -19,8 +19,13 @@
 
     <fragment
         android:id="@+id/sent"
-        android:name="com.example.houseapp.ui.newrequestscreen.SentView"
+        android:name="com.example.houseapp.ui.user.newrequestscreen.SentView"
         android:label="Sent"
         tools:layout="@layout/fragment_request_sent"/>
 
+    <action
+        android:id="@+id/action_navigate_home"
+        app:destination="@id/home"
+        app:popUpTo="@id/form"
+        app:popUpToInclusive="true"/>
 </navigation>
