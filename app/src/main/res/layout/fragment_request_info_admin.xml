@@ -4,14 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
-            name="userVM"
-            type="com.example.houseapp.ui.homescreen.UserViewModel" />
-
-        <variable
-            name="itemVM"
-            type="com.example.houseapp.ui.listscreen.RequestItemViewModel" />
+            name="viewModel"
+            type="com.example.houseapp.ui.admin.RequestItemAdminViewModel" />
     </data>
 
     <ScrollView
@@ -22,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            tools:context="com.example.houseapp.ui.listscreen.RequestItemView">
+            tools:context="com.example.houseapp.ui.admin.RequestItemAdminFragment">
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/info_card"
@@ -57,7 +52,7 @@
                             style="@style/RequestInfo.Headers"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@{itemVM.request.problemType}" />
+                            android:text="@{viewModel.request.problemType}" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -78,7 +73,7 @@
                             style="@style/RequestInfo.Headers"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@{userVM.user.address}" />
+                            android:text="@{}" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -99,7 +94,7 @@
                             style="@style/RequestInfo.Headers"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@{userVM.user.firstName}" />
+                            android:text="@{}" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -121,7 +116,7 @@
                             style="@style/RequestInfo.Headers"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@{itemVM.request.isDone ? (itemVM.request.solution ? @string/status_completed : @string/status_declined) : @string/status_in_progress_info }" />
+                            android:text="@{viewModel.request.isDone ? (viewModel.request.solution ? @string/status_completed : @string/status_declined) : @string/status_in_progress_info }" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -165,7 +160,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/info_message_word"
                         android:layout_marginHorizontal="8dp"
-                        android:text="@{itemVM.request.description}" />
+                        android:text="@{viewModel.request.description}" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/request_date"
@@ -187,7 +182,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="6dp"
                 android:layout_marginBottom="10dp"
-                android:visibility="@{itemVM.request.done}">
+                android:visibility="@{viewModel.request.done}">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -219,7 +214,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@id/info_answer_word"
                         android:layout_marginHorizontal="8dp"
-                        android:text="@{itemVM.request.answer}" />
+                        android:text="@{viewModel.request.answer}" />
 
                     <com.google.android.material.textview.MaterialTextView
                         android:id="@+id/request_answer_date"
@@ -240,7 +235,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:paddingBottom="10dp"
-                android:visibility="@{!itemVM.request.done &amp;&amp; !itemVM.request.done}">
+                android:visibility="@{!viewModel.request.done}">
 
                 <com.google.android.material.card.MaterialCardView
                     style="@style/Widget.HouseApp.CardView"
@@ -311,7 +306,7 @@
                         android:layout_height="wrap_content"
                         android:indeterminate="true"
                         android:paddingEnd="6dp"
-                        android:visibility="@{itemVM.isLoading}" />
+                        android:visibility="@{viewModel.isLoading}" />
 
                     <Button
                         android:id="@+id/acceptButton"

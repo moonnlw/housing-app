@@ -5,23 +5,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/list"
-    app:startDestination="@+id/requestsList">
+    app:startDestination="@id/requestsListUser">
 
     <fragment
-            android:id="@+id/requestsList"
-            android:name="com.example.houseapp.ui.listscreen.RequestsListView"
+            android:id="@+id/requestsListUser"
+            android:name="com.example.houseapp.ui.user.listscreen.RequestsUserFragment"
             android:label="@string/title_list"
-            tools:layout="@layout/fragment_requests_list">
+            tools:layout="@layout/fragment_requests_list_user">
         <action
-            android:id="@+id/action_requests_to_one"
-            app:destination="@id/request"/>
+            android:id="@+id/action_navigate_to_request"
+            app:destination="@id/requestUser"/>
     </fragment>
 
     <fragment
-        android:id="@+id/request"
-        android:name="com.example.houseapp.ui.listscreen.RequestItemView"
+        android:id="@+id/requestUser"
+        android:name="com.example.houseapp.ui.user.listscreen.RequestItemUserFragment"
         android:label="Request"
-        tools:layout="@layout/fragment_request_info">
+        tools:layout="@layout/fragment_request_info_user">
     </fragment>
 
 </navigation>

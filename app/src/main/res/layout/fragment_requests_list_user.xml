@@ -3,13 +3,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.houseapp.ui.listscreen.RequestsListView">
+    tools:context="com.example.houseapp.ui.user.listscreen.RequestsUserFragment">
 
     <data>
 
         <variable
             name="viewModel"
-            type="com.example.houseapp.ui.listscreen.RequestsViewModel" />
+            type="com.example.houseapp.ui.user.listscreen.RequestsUserViewModel" />
     </data>
 
     <FrameLayout
@@ -36,7 +36,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:visibility="@{!viewModel.isLoading}"
-                tools:listitem="@layout/list_view_item" />
+                tools:listitem="@layout/list_view_item_request" />
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </FrameLayout>
 </layout>
