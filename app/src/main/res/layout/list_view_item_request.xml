@@ -11,7 +11,7 @@
 
         <variable
             name="requestCallback"
-            type="com.example.houseapp.ui.listscreen.RequestClickListener" />
+            type="com.example.houseapp.ui.adapters.ItemClickListener" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
