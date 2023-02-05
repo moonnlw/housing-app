@@ -1,43 +1,28 @@
 package com.example.houseapp.ui.user.listscreen
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
-import com.example.houseapp.MyApplication
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import com.example.houseapp.R
 import com.example.houseapp.databinding.FragmentRequestInfoUserBinding
-import com.example.houseapp.ui.adapters.RequestAdapter.Companion.REQUEST_KEY
+import com.example.houseapp.ui.BaseFragment
 
 
 /**
  * Фрагмент отображает выбранную заявку из списка заявок
  */
-class RequestItemUserFragment : Fragment() {
+class RequestItemUserFragment :
+    BaseFragment<FragmentRequestInfoUserBinding, RequestItemUserViewModel>
+        (R.layout.fragment_request_info_user) {
 
-    private val itemViewModel: RequestItemUserViewModel by activityViewModels {
-        (requireActivity().application as MyApplication).appContainer.viewModelFactory
+    private val args by navArgs<RequestItemUserFragmentArgs>()
+
+    override val fragmentViewModel: RequestItemUserViewModel by viewModels { appContainer.viewModelFactory }
+
+    override fun RequestItemUserViewModel.initialize() {
+        userId.value = args.userId.toString()
+        requestId.value = args.requestId
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        itemViewModel.requestId.value = requireArguments().getInt(REQUEST_KEY)
-        val binding =
-            DataBindingUtil.inflate<FragmentRequestInfoUserBinding>(
-                inflater,
-                R.layout.fragment_request_info_user,
-                container,
-                false
-            ).apply {
-                lifecycleOwner = viewLifecycleOwner
-                viewModel = itemViewModel
-            }
-        return binding.root
-    }
+    override fun onReady(savedInstanceState: Bundle?) {}
 }

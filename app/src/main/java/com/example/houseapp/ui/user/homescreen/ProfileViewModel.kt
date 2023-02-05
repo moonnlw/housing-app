@@ -2,63 +2,59 @@ package com.example.houseapp.ui.user.homescreen
 
 import android.util.Log
 import androidx.lifecycle.*
-import com.example.houseapp.data.models.Event
 import com.example.houseapp.data.models.Response.Success
 import com.example.houseapp.data.models.Response.Failure
 import com.example.houseapp.data.models.User
 import com.example.houseapp.data.repos.AuthRepository
 import com.example.houseapp.data.repos.UserRepository
+import com.example.houseapp.ui.BaseViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class ProfileViewModel(
     private val userRepository: UserRepository,
     private val authRepository: AuthRepository
-) : ViewModel() {
+) : BaseViewModel() {
 
-    private val userId: Flow<String?> = authRepository.observeUserId()
-    private val statusMessage = MutableLiveData<Event<String>>()
-    private val _isLoading = MutableLiveData(false)
+    val userIdFlow: MutableStateFlow<String?> = MutableStateFlow("")
 
-    val message: LiveData<Event<String>> get() = statusMessage
-    val isLoading: LiveData<Boolean> get() = _isLoading
-
-    val user: LiveData<User?> = userId.flatMapLatest { id ->
+    /**
+     * Выпускание значения userIdFlow триггерит получение пользователя с новым id
+     */
+    val user: LiveData<User?> = userIdFlow.flatMapLatest { id ->
         userRepository.getUser(id)
     }.asLiveData()
 
-    val isAuthorized: LiveData<Boolean> =
-        authRepository.observeUserId().mapLatest { id ->
-            id != null
-        }.asLiveData()
+    fun signOutUser() = authRepository.signOut()
 
+    /**
+     * Срабатывает при нажатии на кнопку save (data-binding),
+     * Валидация данных пользователя и обработка запроса
+     */
     fun saveUserInfo() {
         val newUserInfo = user.value
         if (!isDataValid(newUserInfo)) {
-            statusMessage.value = Event("Please, fill in all fields before saving")
+            Log.i(this.javaClass.simpleName, newUserInfo.toString())
+            showMessage("Please, fill in all fields before saving")
         } else {
             _isLoading.value = true
             viewModelScope.launch {
                 when (val result = userRepository.updateUser(newUserInfo!!)) {
                     is Success -> {
-                        statusMessage.postValue(Event("Info is successfully saved"))
-                        _isLoading.postValue(false)
+                        showMessage("Info is successfully saved")
                     }
                     is Failure -> {
-                        statusMessage.postValue(Event("Error occurred, try again later"))
-                        _isLoading.postValue(false)
+                        showMessage("Error occurred, try again later")
                         Log.e(this.javaClass.simpleName, result.ex.message.toString())
                     }
                 }
+                _isLoading.postValue(false)
             }
         }
     }
-
-    fun signOutUser() = authRepository.signOut()
 
     private fun isDataValid(user: User?): Boolean {
         Log.i(this.javaClass.simpleName, user.toString())

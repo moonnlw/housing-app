@@ -5,7 +5,7 @@ import com.example.houseapp.data.repos.RequestsRepository
 import com.example.houseapp.data.repos.UserRepository
 import com.example.houseapp.data.models.User
 import com.example.houseapp.data.models.UserRequest
-import com.example.houseapp.data.repos.AuthRepository
+import com.example.houseapp.ui.BaseViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
 
@@ -13,14 +13,10 @@ import kotlinx.coroutines.flow.*
 @OptIn(ExperimentalCoroutinesApi::class)
 class RequestItemUserViewModel(
     private val requestsRepository: RequestsRepository,
-    private val userRepository: UserRepository,
-    private val authRepository: AuthRepository
-) : ViewModel() {
+    private val userRepository: UserRepository
+) : BaseViewModel() {
 
-    private val userId = authRepository.observeUserId()
-    private val _isLoading = MutableLiveData(false)
-    val isLoading: LiveData<Boolean> get() = _isLoading
-
+    val userId = MutableStateFlow("")
     val requestId = MutableStateFlow(0)
 
     val user: LiveData<User?> = userId.flatMapLatest { id ->
