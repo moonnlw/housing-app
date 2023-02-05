@@ -8,6 +8,6 @@ object UserRequests : Table() {
     val description = varchar("description", 1000)
     val requestId = integer("requestid").autoIncrement("seq")
     val isDone = bool("isdone").default(false)
-    val answer = varchar("answer", 1000).nullable()
-    val solution = bool("solution").nullable()
+    val answer = varchar("answer", 1000).default("")
+    val solution = bool("solution").default(false)
 }

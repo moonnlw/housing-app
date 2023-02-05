@@ -16,8 +16,8 @@ data class DatabaseUser constructor(
         entity = DatabaseUser::class,
         parentColumns = arrayOf("id"),
         childColumns = arrayOf("user_id"),
-        onDelete = ForeignKey.CASCADE,
-        onUpdate = ForeignKey.CASCADE
+        onDelete = ForeignKey.NO_ACTION,
+        onUpdate = ForeignKey.NO_ACTION
     )
 ])
 data class DatabaseRequest constructor(
@@ -26,8 +26,8 @@ data class DatabaseRequest constructor(
     @ColumnInfo(name = "problem") val problemType: String,
     @ColumnInfo(name = "description") val description: String,
     @ColumnInfo(name = "req_is_done") val isDone: Boolean,
-    @ColumnInfo(name = "req_answer") val answer: String?,
-    @ColumnInfo(name = "solution") val solution: Boolean?
+    @ColumnInfo(name = "req_answer") val answer: String,
+    @ColumnInfo(name = "solution") val solution: Boolean
 )
 
 data class DatabaseUserWithRequests(

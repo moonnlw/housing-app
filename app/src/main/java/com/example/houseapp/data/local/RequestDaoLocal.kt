@@ -16,7 +16,7 @@ interface RequestDaoLocal {
     suspend fun insertAll(requests: List<DatabaseRequest>)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(requests: DatabaseRequest)
+    suspend fun insert(request: DatabaseRequest)
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun update(request: DatabaseRequest)

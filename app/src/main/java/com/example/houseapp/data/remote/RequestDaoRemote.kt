@@ -11,7 +11,9 @@ class RequestDaoRemote {
         userId = row[UserRequests.userId],
         problemType = row[UserRequests.problemType],
         description = row[UserRequests.description],
-        isDone = row[UserRequests.isDone]
+        isDone = row[UserRequests.isDone],
+        solution = row[UserRequests.solution],
+        answer = row[UserRequests.answer]
     )
 
     suspend fun getAllRequests(): List<UserRequest> = dbQuery {
@@ -32,5 +34,13 @@ class RequestDaoRemote {
         }
 
         insertStatement.resultedValues?.singleOrNull()?.let(::resultRowToRequest)
+    }
+
+    suspend fun update(userRequest: UserRequest) = dbQuery {
+        UserRequests.update({ UserRequests.requestId eq userRequest.requestId!! }) {
+            it[answer] = userRequest.answer
+            it[solution] = userRequest.solution
+            it[isDone] = userRequest.isDone
+        }
     }
 }

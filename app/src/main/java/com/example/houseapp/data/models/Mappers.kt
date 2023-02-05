@@ -2,9 +2,7 @@ package com.example.houseapp.data.models
 
 import com.example.houseapp.data.local.DatabaseRequest
 import com.example.houseapp.data.local.DatabaseUser
-import com.example.houseapp.data.local.DatabaseUserWithRequests
 
-fun List<DatabaseRequest>.asDomainModel(): List<UserRequest> = map { it.asDomainModel() }
 
 fun DatabaseRequest.asDomainModel(): UserRequest {
     return UserRequest(
@@ -16,10 +14,6 @@ fun DatabaseRequest.asDomainModel(): UserRequest {
         answer = answer,
         solution = solution
     )
-}
-
-fun List<UserRequest>.asDatabaseModel(): List<DatabaseRequest> {
-    return map { it.asDatabaseModel() }
 }
 
 fun UserRequest.asDatabaseModel(): DatabaseRequest {
@@ -34,18 +28,7 @@ fun UserRequest.asDatabaseModel(): DatabaseRequest {
     )
 }
 
-fun User.asDatabaseModel2(): DatabaseUserWithRequests {
-    return DatabaseUserWithRequests(
-        DatabaseUser(
-            id = id,
-            firstName = firstName,
-            lastName = lastName,
-            address = address,
-            phoneNumber = phone
-        ),
-        requests = emptyList()
-    )
-}
+
 
 fun User.asDatabaseModel(): DatabaseUser {
     return DatabaseUser(
