@@ -1,14 +1,12 @@
 package com.example.houseapp
 
 import android.content.Context
-import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.NavHostFragment
@@ -17,16 +15,15 @@ import com.example.houseapp.utils.DatabaseConnection
 import com.example.houseapp.utils.NetworkConnection
 
 
+/**
+ * Стартовое активити приложения, ответсвенное за авторизацию пользователя.
+ */
 class AuthActivity : AppCompatActivity() {
-
-    private val authViewModel by viewModels<AuthViewModel> {
-        (application as MyApplication).appContainer.viewModelFactory
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         connectToDatabase()
-        observeData()
+        initializeUI()
     }
 
     private fun initializeUI() {
@@ -34,26 +31,6 @@ class AuthActivity : AppCompatActivity() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_container_auth) as NavHostFragment
         navHostFragment.navController
-    }
-
-    /**
-     * Подписывается на isAuthorized в [authViewModel], задерживая отрисовку UI.
-     * Если пользователь авторизован: Intent на [UserActivity]/[AdminActivity] в зависимости от роли
-     * Иначе: отрисовываем UI для дальнейшей авторизации
-     */
-    private fun observeData() {
-        authViewModel.isAuthorized.observe(this) { isAuth ->
-            if (isAuth) {
-                val intent = Intent(
-                    application,
-                    if (authViewModel.isAdmin) AdminActivity::class.java else UserActivity::class.java
-                )
-                startActivity(intent)
-                this.finish()
-            } else {
-                initializeUI()
-            }
-        }
     }
 
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {

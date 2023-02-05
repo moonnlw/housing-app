@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<navigation
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/auth"
@@ -9,32 +8,45 @@
 
     <activity
         android:id="@+id/userActivityDestination"
-        android:name="com.example.houseapp.UserActivity"
-        />
-
+        android:name="com.example.houseapp.UserActivity" />
 
     <activity
         android:id="@+id/adminActivityDestination"
-        android:name="com.example.houseapp.AdminActivity"
-        />
+        android:name="com.example.houseapp.AdminActivity" />
 
     <fragment
         android:id="@+id/login"
-        tools:layout="@layout/fragment_login"
-        android:name="com.example.houseapp.ui.user.loginscreen.LoginFragment">
+        android:name="com.example.houseapp.ui.user.loginscreen.LoginFragment"
+        tools:layout="@layout/fragment_login">
 
         <action
             android:id="@+id/navigate_to_signup_fragment"
-            app:destination="@id/signup"/>
+            app:destination="@id/signup" />
+
+        <action
+            android:id="@+id/navigate_to_user_activity"
+            app:destination="@id/userActivityDestination" />
+
+        <action
+            android:id="@+id/navigate_to_admin_activity"
+            app:destination="@id/adminActivityDestination" />
     </fragment>
 
     <fragment
         android:id="@+id/signup"
-        tools:layout="@layout/fragment_signup"
-        android:name="com.example.houseapp.ui.user.loginscreen.SignupFragment">
+        android:name="com.example.houseapp.ui.user.loginscreen.SignupFragment"
+        tools:layout="@layout/fragment_signup">
 
         <action
             android:id="@+id/navigate_to_login_fragment"
-            app:destination="@id/login"/>
+            app:destination="@id/login" />
+
+        <action
+            android:id="@+id/navigate_to_user_activity"
+            app:destination="@id/userActivityDestination" />
+
+        <action
+            android:id="@+id/navigate_to_admin_activity"
+            app:destination="@id/adminActivityDestination" />
     </fragment>
 </navigation>
