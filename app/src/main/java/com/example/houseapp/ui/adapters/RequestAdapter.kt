@@ -25,8 +25,4 @@ class RequestAdapter(private val callback: ItemClickListener<UserRequest>) :
             it.requestCallback = callback
         }
     }
-
-    companion object {
-        const val REQUEST_KEY = "id"
-    }
 }

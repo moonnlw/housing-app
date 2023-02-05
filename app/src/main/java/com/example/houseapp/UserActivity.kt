@@ -3,11 +3,14 @@ package com.example.houseapp
 import android.content.Context
 import android.graphics.Rect
 import android.os.Bundle
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
@@ -18,14 +21,23 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.houseapp.databinding.ActivityMainUserBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
+/**
+ * Главное активити пользователя, отрисовывает UI для пользователя
+ */
 class UserActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
 
+    private val authViewModel: AuthViewModel by viewModels {
+        (application as MyApplication).appContainer.viewModelFactory
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.e(this.javaClass.simpleName, "AuthActivity onCreate() starts")
         initializeUI()
+        observeAuthorizationStatus()
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -46,7 +58,7 @@ class UserActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
 
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.profileScreen, R.id.requestsListUser, R.id.createRequest)
+            setOf(R.id.profileScreen, R.id.requestsList, R.id.createRequest)
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
 
@@ -56,6 +68,27 @@ class UserActivity : AppCompatActivity() {
                     R.id.requestUser -> View.GONE
                     else -> View.VISIBLE
                 }
+        }
+
+        /**
+         * Передаем userId в каждое из назначений графа
+         */
+        val args = bundleOf("userId" to authViewModel.userId)
+        navController.setGraph(R.navigation.nav_graph_user, args)
+
+        bottomNavigationView.setOnItemReselectedListener { }
+        bottomNavigationView.setOnItemSelectedListener { item ->
+            navController.navigate(item.itemId, args)
+            true
+        }
+    }
+
+    /**
+     * В случае окончания сессии -> навигация к [AuthActivity]
+     */
+    private fun observeAuthorizationStatus() {
+        authViewModel.userIdLiveData.observe(this) {
+            if (it.isNullOrEmpty()) navController.navigate(AuthActivityDirections.navigateToAuthActivity())
         }
     }
 

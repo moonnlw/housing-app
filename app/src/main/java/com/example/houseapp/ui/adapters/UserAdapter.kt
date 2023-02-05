@@ -25,8 +25,4 @@ class UserAdapter(private val callback: ItemClickListener<User>) :
             it.userCallback = callback
         }
     }
-
-    companion object {
-        const val USER_KEY = "id"
-    }
 }
