@@ -47,9 +47,10 @@ class UserDaoRemote {
         }
     }
 
-    suspend fun getUserIfAdmin(id: String) = dbQuery {
+    suspend fun getUserIfAdmin(id: String): User? = dbQuery {
         Users
             .select { Users.userId eq id and(Users.isAdmin eq true) }
             .map(::resultRowToUser)
+            .firstOrNull()
     }
 }

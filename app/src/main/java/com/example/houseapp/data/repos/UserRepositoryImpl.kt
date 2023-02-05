@@ -27,10 +27,10 @@ class UserRepositoryImpl private constructor(
             }
     }
 
-    override suspend fun getUser(id: String?): Flow<User?> =
+    override fun getUser(id: String?): Flow<User?> =
         database.userDaoLocal.getUser(id).map { it?.asDomainModel() }
 
-    override suspend fun getAllUsers(): Flow<List<User>> =
+    override fun getAllUsers(): Flow<List<User>> =
         database.userDaoLocal.getAllUsers()
             .map { it.map { user -> user.asDomainModel() } }
 
@@ -41,6 +41,15 @@ class UserRepositoryImpl private constructor(
             }
             true
         }
+
+    override suspend fun refreshAllUsers(): Response<Boolean> =
+        Response.to {
+            userDaoRemote.getAllUsers().also {
+                database.userDaoLocal.insertAll(it.map { user -> user.asDatabaseModel() })
+            }
+            true
+        }
+
 
     override suspend fun updateUser(user: User): Response<Boolean> =
         Response.to {
@@ -58,7 +67,7 @@ class UserRepositoryImpl private constructor(
         }
 
     override suspend fun isUserAdmin(id: String): Boolean =
-        userDaoRemote.getUserIfAdmin(id).isNotEmpty()
+        userDaoRemote.getUserIfAdmin(id) != null
 
     override suspend fun isUserDatabaseEmpty(): Boolean = database.userDaoLocal.count() == 0
 }

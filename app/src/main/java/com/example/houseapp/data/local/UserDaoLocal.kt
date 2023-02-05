@@ -15,6 +15,9 @@ interface UserDaoLocal {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(user: DatabaseUser)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAll(userList: List<DatabaseUser>)
+
     @Update(onConflict = OnConflictStrategy.REPLACE)
     suspend fun update(user: DatabaseUser)
 
