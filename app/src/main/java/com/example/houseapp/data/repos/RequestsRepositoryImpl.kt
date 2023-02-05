@@ -41,13 +41,16 @@ class RequestsRepositoryImpl private constructor(
         Response.to {
             id?.let {
                 val newRequests = requestDaoRemote.getRequestsByUserID(it)
-                database.requestDaoLocal.insertAll(newRequests.asDatabaseModel())
+                database.requestDaoLocal.insertAll(
+                    newRequests.map { request -> request.asDatabaseModel() }
+                )
             }
             true
         }
 
     override suspend fun updateRequest(request: UserRequest): Response<Boolean> =
         Response.to {
+            requestDaoRemote.update(request)
             database.requestDaoLocal.update(request.asDatabaseModel())
             true
         }
@@ -55,7 +58,9 @@ class RequestsRepositoryImpl private constructor(
     override suspend fun refreshAllRequests(): Response<Boolean> =
         Response.to {
             val newRequests = requestDaoRemote.getAllRequests()
-            database.requestDaoLocal.insertAll(newRequests.asDatabaseModel())
+            database.requestDaoLocal.insertAll(
+                newRequests.map { request -> request.asDatabaseModel() }
+            )
             true
         }
 
