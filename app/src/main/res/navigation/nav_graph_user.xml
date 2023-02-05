@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<navigation
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph_user"
-    app:startDestination="@+id/list">
+    app:startDestination="@+id/requests_user">
 
-    <include app:graph="@navigation/home"/>
-    <include app:graph="@navigation/list"/>
-    <include app:graph="@navigation/form"/>
+    <activity
+        android:id="@+id/authActivityDestination"
+        android:name="com.example.houseapp.AuthActivity" />
+
+    <action
+        android:id="@+id/navigate_to_auth_activity"
+        app:destination="@id/authActivityDestination" />
+
+    <include app:graph="@navigation/home" />
+    <include app:graph="@navigation/requests_user" />
+    <include app:graph="@navigation/form" />
 
 </navigation>

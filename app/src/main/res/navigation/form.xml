@@ -12,16 +12,12 @@
             android:name="com.example.houseapp.ui.user.newrequestscreen.CreateRequestFragment"
             android:label="Create new request"
             tools:layout="@layout/fragment_create_request">
-        <action
-            android:id="@+id/action_createRequest_to_sent"
-            app:destination="@id/sent"/>
+        <argument
+            android:name="userId"
+            app:nullable="true"
+            app:argType="string"
+            android:defaultValue="@null"/>
     </fragment>
-
-    <fragment
-        android:id="@+id/sent"
-        android:name="com.example.houseapp.ui.user.newrequestscreen.SentView"
-        android:label="Sent"
-        tools:layout="@layout/fragment_request_sent"/>
 
     <action
         android:id="@+id/action_navigate_home"

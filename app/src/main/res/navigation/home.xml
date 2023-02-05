@@ -12,6 +12,11 @@
         android:name="com.example.houseapp.ui.user.homescreen.ProfileFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_profile">
+        <argument
+            android:name="userId"
+            app:nullable="true"
+            app:argType="string"
+            android:defaultValue="@null"/>
     </fragment>
 
 </navigation>

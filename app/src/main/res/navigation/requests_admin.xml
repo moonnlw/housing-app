@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/requests_admin"
+    app:startDestination="@id/usersList">
+
+    <fragment
+        android:id="@+id/usersList"
+        android:name="com.example.houseapp.ui.admin.UserListFragment"
+        android:label="Users"
+        tools:layout="@layout/fragment_user_list">
+
+        <action
+            android:id="@+id/action_usersList_to_requestsList"
+            app:destination="@id/requestsList">
+            <argument
+                android:name="userId"
+                android:defaultValue="@null"
+                app:argType="string"
+                app:nullable="true" />
+        </action>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/requestsList"
+        android:name="com.example.houseapp.ui.user.listscreen.RequestListFragment"
+        android:label="@string/title_list"
+        tools:layout="@layout/fragment_request_list">
+
+        <argument
+            android:name="userId"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true" />
+
+        <action
+            android:id="@+id/action_navigate_to_request"
+            app:destination="@id/requestAdmin">
+            <argument
+                android:name="requestId"
+                android:defaultValue="0"
+                app:argType="integer" />
+            <argument
+                android:name="userId"
+                android:defaultValue="@null"
+                app:argType="string"
+                app:nullable="true" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/requestAdmin"
+        android:name="com.example.houseapp.ui.admin.RequestItemAdminFragment"
+        android:label="Request"
+        tools:layout="@layout/fragment_request_info_admin">
+
+        <argument
+            android:name="requestId"
+            android:defaultValue="0"
+            app:argType="integer" />
+
+        <argument
+            android:name="userId"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
+
+</navigation>

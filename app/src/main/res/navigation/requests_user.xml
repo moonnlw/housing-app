@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/requests_user"
+    app:startDestination="@id/requestsList">
+
+    <fragment
+        android:id="@+id/requestsList"
+        android:name="com.example.houseapp.ui.user.listscreen.RequestListFragment"
+        android:label="@string/title_list"
+        tools:layout="@layout/fragment_request_list">
+
+        <argument
+            android:name="userId"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true" />
+
+        <action
+            android:id="@+id/action_navigate_to_request"
+            app:destination="@id/requestUser">
+
+            <argument
+                android:name="requestId"
+                android:defaultValue="0"
+                app:argType="integer" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/requestUser"
+        android:name="com.example.houseapp.ui.user.listscreen.RequestItemUserFragment"
+        android:label="Request"
+        tools:layout="@layout/fragment_request_info_user">
+        <argument
+            android:name="requestId"
+            android:defaultValue="0"
+            app:argType="integer" />
+
+        <argument
+            android:name="userId"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
+
+</navigation>
