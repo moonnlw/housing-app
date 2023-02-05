@@ -33,15 +33,6 @@
             app:defaultNavHost="true"
             app:navGraph="@navigation/nav_graph_admin" />
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottom_nav"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:elevation="3dp"
-            android:fitsSystemWindows="true"
-            app:itemRippleColor="@null"
-            app:labelVisibilityMode="selected"
-            app:menu="@menu/bottom_nav_menu" />
     </LinearLayout>
 
 </layout>
