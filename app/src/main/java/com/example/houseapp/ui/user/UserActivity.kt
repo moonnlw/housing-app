@@ -1,4 +1,4 @@
-package com.example.houseapp
+package com.example.houseapp.ui.user
 
 import android.content.Context
 import android.graphics.Rect
@@ -18,6 +18,11 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.houseapp.AuthActivityDirections
+import com.example.houseapp.AuthViewModel
+import com.example.houseapp.MyApplication
+import com.example.houseapp.R
+import com.example.houseapp.AuthActivity
 import com.example.houseapp.databinding.ActivityMainUserBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -88,7 +93,8 @@ class UserActivity : AppCompatActivity() {
      */
     private fun observeAuthorizationStatus() {
         authViewModel.userIdLiveData.observe(this) {
-            if (it.isNullOrEmpty()) navController.navigate(AuthActivityDirections.navigateToAuthActivity())
+            val action = AuthActivityDirections.navigateToAuthActivity()
+            if (it.isNullOrEmpty()) navController.navigate(action)
         }
     }
 

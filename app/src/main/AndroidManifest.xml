@@ -31,7 +31,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".UserActivity"
+            android:name=".ui.user.UserActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustPan">
 
@@ -41,7 +41,7 @@
         </activity>
 
         <activity
-            android:name=".AdminActivity"
+            android:name=".ui.admin.AdminActivity"
             android:exported="true"
             android:windowSoftInputMode="adjustPan">
 

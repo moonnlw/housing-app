@@ -8,11 +8,11 @@
 
     <activity
         android:id="@+id/userActivityDestination"
-        android:name="com.example.houseapp.UserActivity" />
+        android:name="com.example.houseapp.ui.user.UserActivity" />
 
     <activity
         android:id="@+id/adminActivityDestination"
-        android:name="com.example.houseapp.AdminActivity" />
+        android:name="com.example.houseapp.ui.admin.AdminActivity" />
 
     <fragment
         android:id="@+id/login"
