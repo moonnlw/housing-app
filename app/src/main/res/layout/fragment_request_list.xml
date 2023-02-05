@@ -3,13 +3,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.houseapp.ui.admin.listscreen.RequestsAdminFragment">
+    tools:context="com.example.houseapp.ui.user.listscreen.RequestListFragment">
 
     <data>
 
         <variable
             name="viewModel"
-            type="com.example.houseapp.ui.admin.RequestsAdminViewModel" />
+            type="com.example.houseapp.ui.user.listscreen.RequestListViewModel" />
     </data>
 
     <FrameLayout
@@ -32,7 +32,7 @@
             app:refreshing="@{viewModel.isLoading}">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/requests_list"
+                android:id="@+id/request_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:visibility="@{!viewModel.isLoading}"

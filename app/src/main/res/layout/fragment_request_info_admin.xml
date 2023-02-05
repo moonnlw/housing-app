@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.example.houseapp.ui.admin.RequestItemAdminViewModel" />
@@ -30,8 +31,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginVertical="8.5dp"
                     android:layout_marginHorizontal="16dp"
+                    android:layout_marginVertical="8.5dp"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -73,7 +74,7 @@
                             style="@style/RequestInfo.Headers"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@{}" />
+                            android:text="@{viewModel.user.address}" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -94,7 +95,7 @@
                             style="@style/RequestInfo.Headers"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@{}" />
+                            android:text="@{viewModel.user.firstName}" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -182,7 +183,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="6dp"
                 android:layout_marginBottom="10dp"
-                android:visibility="@{viewModel.request.done}">
+                android:visibility="@{viewModel.request.done &amp;&amp; !viewModel.isLoading}">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -235,7 +236,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:paddingBottom="10dp"
-                android:visibility="@{!viewModel.request.done}">
+                android:visibility="@{!viewModel.request.done || viewModel.isLoading()}">
 
                 <com.google.android.material.card.MaterialCardView
                     style="@style/Widget.HouseApp.CardView"
@@ -287,6 +288,8 @@
                                 android:gravity="bottom|start"
                                 android:lineSpacingMultiplier="1.05"
 
+
+                                android:text="@={viewModel.request.bAnswer}"
                                 android:maxLength="300"
                                 android:textAppearance="@style/RequestInfo" />
                         </com.google.android.material.textfield.TextInputLayout>
@@ -317,6 +320,7 @@
                         android:layout_gravity="end"
                         android:layout_marginTop="7.5dp"
                         android:layout_marginEnd="6dp"
+                        android:onClick="@{() -> viewModel.answerRequest(true)}"
                         android:text="@string/accept"
                         app:icon="@drawable/ic_approve" />
 
@@ -329,8 +333,10 @@
                         android:layout_gravity="end"
                         android:layout_marginTop="7.5dp"
                         android:layout_marginEnd="12dp"
+                        android:onClick="@{() -> viewModel.answerRequest(false)}"
                         android:text="@string/decline"
                         app:icon="@drawable/ic_decline" />
+
                 </RelativeLayout>
             </LinearLayout>
 

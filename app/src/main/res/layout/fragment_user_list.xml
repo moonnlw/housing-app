@@ -3,13 +3,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.houseapp.ui.user.listscreen.RequestsUserFragment">
+    tools:context="com.example.houseapp.ui.admin.UserListFragment">
 
     <data>
-
         <variable
             name="viewModel"
-            type="com.example.houseapp.ui.user.listscreen.RequestsUserViewModel" />
+            type="com.example.houseapp.ui.admin.UserListViewModel" />
     </data>
 
     <FrameLayout
@@ -28,15 +27,15 @@
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:onRefreshListener="@{() -> viewModel.refreshRequests()}"
+            app:onRefreshListener="@{() -> viewModel.refreshUsers()}"
             app:refreshing="@{viewModel.isLoading}">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/requests_list"
+                android:id="@+id/user_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:visibility="@{!viewModel.isLoading}"
-                tools:listitem="@layout/list_view_item_request" />
+                tools:listitem="@layout/list_view_item_user" />
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </FrameLayout>
 </layout>

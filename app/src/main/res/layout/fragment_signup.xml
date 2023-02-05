@@ -117,7 +117,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
                     android:layout_marginTop="16dp"
-                    android:text="@string/login" />
+                    android:text="@string/login"
+                    android:onClick="@{() -> viewModel.navigateToLogin()}"/>
 
             </LinearLayout>
 
